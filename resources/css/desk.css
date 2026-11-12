@@ -1,0 +1,511 @@
+/* Ported from the original Crystal Creek Estimating Desk stylesheet
+   (docs/superpowers/reference/crystal-creek/index.D_o7GGtd.css), scoped under .desk. */
+@layer components {
+.desk{--paper:#f5f7f5;--white:#fff;--ink:#162721;--muted:#5c6b64;--line:#e0e7e2;--green:#17664e;--dark:#102d26;--sidebar:#102c25;--soft:#eaf4ee;--radius:13px;color:var(--ink);background:var(--paper);font-synthesis:none;font-family:Arial,Helvetica,sans-serif}
+.desk, .desk *{box-sizing:border-box}
+.desk{margin:0}
+.desk button,.desk input,.desk textarea,.desk select{font:inherit;color:inherit}
+.desk button{cursor:pointer}
+.desk button:disabled{opacity:.55;cursor:not-allowed}
+.desk :is(button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible){outline-offset:2px;outline:2px solid #33856b}
+.desk h1,.desk h2,.desk h3,.desk p{margin:0}
+.desk h1,.desk h2,.desk h3,.desk strong,.desk b{font-weight:700}
+.desk h1{letter-spacing:-.06em;font-size:clamp(32px,4vw,48px);line-height:1.06}
+.desk h2{letter-spacing:-.035em;font-size:22px}
+.desk h3{letter-spacing:-.025em;font-size:17px}
+.desk p{line-height:1.55}
+.desk svg{flex:none}
+.desk button svg,.desk th svg{vertical-align:middle}
+.desk .shell{grid-template-columns:248px minmax(0,1fr);min-height:100vh;display:grid}
+.desk .sidebar{background:var(--sidebar);color:#e8f4ee;flex-direction:column;height:100vh;padding:26px 15px 18px;display:flex;position:sticky;top:0;overflow:auto}
+.desk .wordmark{align-items:center;gap:10px;margin:0 9px 42px;display:flex}
+.desk .wordmark img{border:1px solid #43705e;border-radius:11px;width:42px;height:42px}
+.desk .wordmark div,.desk .sidebar-foot div{gap:5px;display:grid}
+.desk .wordmark strong{letter-spacing:.095em;font-size:13px}
+.desk .wordmark span{letter-spacing:.21em;color:#a9c7b8;font-size:9px}
+.desk .side-group{gap:4px;margin-bottom:29px;display:grid}
+.desk .side-label{letter-spacing:.16em;color:#a0bdb0;margin-bottom:7px;padding:0 11px;font-size:9px;font-weight:700}
+.desk .side-group button{text-align:left;color:#d0dfd8;background:0 0;border:0;border-radius:8px;align-items:center;gap:10px;min-height:40px;padding:11px;font-size:13px;display:flex}
+.desk .side-group button:hover,.desk .side-group button.active{color:#fff;background:#244d40}
+.desk .side-group button.active svg{color:#a4e9be}
+.desk .company-dot{border-radius:50%;flex:none;width:8px;height:8px;margin:0 4px;box-shadow:0 0 0 2px #ffffff19}
+.desk .companies button{font-size:12px}
+.desk .sidebar-foot{border-top:1px solid #365148;align-items:center;gap:10px;margin-top:auto;padding:16px 4px 0;display:flex}
+.desk .sidebar-foot strong{font-size:12px}
+.desk .sidebar-foot div span{color:#aec2b8;font-size:11px}
+.desk .workspace-avatar{color:#d6f3e0;background:#325848;border-radius:50%;place-items:center;width:34px;height:34px;font-size:11px;font-weight:700;display:grid}
+.desk .main{flex-direction:column;min-width:0;display:flex}
+.desk .topbar{border-bottom:1px solid var(--line);background:#fff;justify-content:space-between;align-items:center;gap:12px;height:63px;padding:0 32px;font-size:13px;display:flex}
+.desk .crumb{color:var(--muted);align-items:center;gap:10px;display:flex}
+.desk .crumb strong{color:var(--ink);font-weight:600}
+.desk .private{color:#486155;white-space:nowrap;align-items:center;gap:7px;font-size:12px;display:flex}
+.desk .private i,.desk .eyebrow i{background:#539970;border-radius:50%;width:7px;height:7px}
+.desk .mobile-menu{display:none!important}
+.desk .content{flex:1;width:min(100%,1470px);margin:0 auto;padding:31px 32px 28px}
+.desk .page-heading{justify-content:space-between;align-items:flex-end;gap:20px;margin:0 0 25px;display:flex}
+.desk .page-heading p{color:var(--muted);margin-top:10px;font-size:14px}
+.desk .dashboard-heading{margin-bottom:25px}
+.desk .eyebrow{letter-spacing:.145em;color:#36715c;align-items:center;gap:8px;margin-bottom:10px;font-size:10px;font-weight:800;display:flex}
+.desk .actions{flex-wrap:wrap;justify-content:flex-end;gap:8px;display:flex}
+.desk .button{white-space:nowrap;border:1px solid #0000;border-radius:8px;justify-content:center;align-items:center;gap:7px;min-height:39px;padding:0 13px;font-size:13px;font-weight:700;display:inline-flex}
+.desk .primary{color:#fff;background:#185942;border-color:#185942;box-shadow:0 2px 2px #0f3c2c15}
+.desk .primary:hover{background:#104332}
+.desk .secondary{background:#fff;border-color:#dce5de}
+.desk .secondary:hover{background:#f4f8f5}
+.desk .compact{min-height:34px;font-size:12px}
+.desk .text-button,.desk .back,.desk .row-link{color:#21664e;text-align:left;background:0 0;border:0;align-items:center;gap:7px;padding:0;font-size:13px;font-weight:700;display:inline-flex}
+.desk .text-button:hover,.desk .back:hover,.desk .row-link:hover{text-decoration:underline}
+.desk .back{margin-bottom:19px}
+.desk .icon-button{color:#546960;background:0 0;border:0;border-radius:6px;place-items:center;width:30px;height:30px;display:inline-grid}
+.desk .icon-button:hover{background:#eaf2ec}
+.desk .panel{border:1px solid var(--line);border-radius:var(--radius);background:#fff;min-width:0;box-shadow:0 2px 4px #19372a05}
+.desk .metrics{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:22px;display:grid}
+.desk .metric{gap:6px;padding:15px 16px;display:grid}
+.desk .metric>div{color:#44564d;justify-content:space-between;align-items:center;gap:5px;font-size:13px;font-weight:700;display:flex}
+.desk .metric strong{letter-spacing:-.05em;overflow-wrap:anywhere;font-size:28px}
+.desk .metric small{color:var(--muted);font-size:11px}
+.desk .metric-icon,.desk .brand-icon{border-radius:8px;flex:none;place-items:center;width:32px;height:32px;display:grid}
+.desk .green{color:#3a7c56;background:#eaf5ec}
+.desk .orange{color:#a86b2f;background:#fff2df}
+.desk .blue{color:#3e758f;background:#e8f2f8}
+.desk .purple{color:#73639f;background:#f0edf8}
+.desk .brand-icon{background:var(--company-tone);color:var(--company-color);width:38px;height:38px}
+.desk .table-heading{justify-content:space-between;align-items:center;gap:10px;padding:17px 19px 13px;display:flex}
+.desk .table-heading p,.desk .muted{color:var(--muted);margin-top:5px;font-size:13px}
+.desk .filters{justify-content:space-between;gap:10px;padding:0 19px 15px;display:flex}
+.desk .selects,.desk .template-filters{flex-wrap:wrap;gap:8px;display:flex}
+.desk .template-filters{margin-bottom:17px}
+.desk .search{color:#5a7065;background:#fff;border:1px solid #dce4de;border-radius:8px;flex:1;align-items:center;gap:8px;min-width:175px;max-width:310px;padding:0 10px;display:flex}
+.desk .search input{background:0 0;border:0;height:32px;padding:0}
+.desk .search:focus-within{outline:2px solid #33856b}
+.desk .search input:focus-visible{outline:none}
+.desk input,.desk textarea,.desk select{background:#fff;border:1px solid #dce4de;border-radius:7px;width:100%;min-width:0;padding:8px 9px;font-size:13px}
+.desk input[type=checkbox]{accent-color:#17664e;width:15px;height:15px}
+.desk textarea{resize:vertical;min-height:79px}
+.desk select{cursor:pointer;width:auto;max-width:100%}
+.desk ::placeholder{color:#6a7972}
+.desk .scroll{overflow-x:auto}
+.desk table{border-collapse:collapse;text-align:left;width:100%;font-size:13px}
+.desk th,.desk td{border-bottom:1px solid #e8eee9;padding:11px 12px}
+.desk thead th{color:#52635b;white-space:nowrap;background:#f2f6f3;font-size:11px;font-weight:700}
+.desk th:first-child,.desk td:first-child{padding-left:18px}
+.desk .estimate-table{min-width:640px}
+.desk .estimate-table td{color:#506258}
+.desk .estimate-table .row-link{color:var(--ink);font-weight:700}
+.desk .estimate-table small,.desk .compare-panel small{color:var(--muted);margin-top:5px;display:block}
+.desk .estimate-table .amount{color:var(--ink);white-space:nowrap;font-weight:700}
+.desk .check-col{width:44px}
+.desk .company-tag,.desk .badge{white-space:nowrap;border-radius:20px;align-items:center;gap:6px;padding:4px 8px;font-size:11px;font-weight:700;display:inline-flex}
+.desk .company-tag{background:var(--company-tone);color:var(--company-color)}
+.desk .badge{color:#53615b;background:#edf0ed}
+.desk .badge i{background:currentColor;border-radius:50%;width:6px;height:6px}
+.desk .badge.approved{color:#27633f;background:#e6f5e9}
+.desk .badge.pending-approval{color:#895114;background:#fff1d9}
+.desk .badge.declined{color:#993e3a;background:#fbe9e7}
+.desk .table-foot{border-top:1px solid var(--line);color:var(--muted);justify-content:space-between;padding:11px 19px;font-size:11px;display:flex}
+.desk .empty{text-align:center;flex-direction:column;justify-content:center;align-items:center;gap:8px;min-height:195px;padding:17px;display:flex}
+.desk .empty h3{font-size:17px}
+.desk .empty p{color:var(--muted);font-size:13px}
+.desk .empty .button{margin-top:4px}
+.desk .empty-icon{color:#457a62;background:#eaf3ed;border-radius:11px;place-items:center;width:43px;height:43px;display:grid}
+.desk .catalog-heading{justify-content:space-between;align-items:flex-end;gap:10px;margin:24px 0 12px;display:flex}
+.desk .catalog-heading .eyebrow{margin-bottom:6px}
+.desk .company-grid,.desk .template-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;display:grid}
+.desk .company-card{text-align:left;align-items:center;gap:9px;padding:12px;display:flex}
+.desk .company-card:hover,.desk .template-card:hover{border-color:#acc8b7}
+.desk .company-card div{flex:1;gap:4px;display:grid}
+.desk .company-card strong{font-size:13px}
+.desk .company-card div span{color:var(--muted);font-size:11px}
+.desk .company-card>svg{color:#6b8176}
+.desk .main-footer{color:#64756b;justify-content:space-between;gap:10px;padding:12px 32px 18px;font-size:11px;display:flex}
+.desk .footer-dot{padding:0 5px}
+.desk .section{margin-bottom:14px;padding:18px}
+.desk .section h3{margin-bottom:10px}
+.desk .section .muted{margin-bottom:12px}
+.desk .editor-grid{grid-template-columns:minmax(0,1fr) minmax(232px,27%);align-items:start;gap:15px;display:grid}
+.desk .fields{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:12px 0 0;display:grid}
+.desk .fields.one{grid-template-columns:1fr}
+.desk .fields label,.desk .proposal-tools label{color:#475a50;gap:6px;font-size:12px;font-weight:700;display:grid}
+.desk .fields label select{width:100%}
+.desk .fields .wide{grid-column:1/-1}
+.desk .pricing-fields{grid-template-columns:repeat(3,minmax(0,1fr))}
+.desk .unit-input{background:#fff;border:1px solid #dce4de;border-radius:7px;align-items:center;display:flex}
+.desk .unit-input span{color:#60766a;padding-left:9px}
+.desk .unit-input input{border:0}
+.desk .line-table{min-width:620px;margin-bottom:13px}
+.desk .line-table th,.desk .line-table td{padding:6px 4px}
+.desk .line-table input{padding:7px 5px}
+.desk .line-table td:first-child{width:26%}
+.desk .line-table td:nth-child(2),.desk .line-table td:nth-child(3){width:10%}
+.desk .line-table td:nth-child(4),.desk .line-table td:nth-child(5),.desk .line-table td:nth-child(6){width:13%}
+.desk .line-table td:nth-child(7){white-space:nowrap}
+.desk .total-panel{padding:18px;position:sticky;top:16px}
+.desk .total-panel p{color:var(--muted);margin-top:8px;font-size:12px}
+.desk dl{grid-template-columns:1fr auto;gap:10px;margin:16px 0;font-size:13px;display:grid}
+.desk dt{color:#53665b}
+.desk dd{text-align:right;margin:0;font-weight:700}
+.desk .total-row,.desk .margin-row{justify-content:space-between;align-items:center;gap:10px;display:flex}
+.desk .total-row{border-top:1px solid var(--line);color:#154f39;padding:12px 0;font-size:13px;font-weight:700}
+.desk .total-row strong{letter-spacing:-.04em;font-size:23px}
+.desk .margin-row{border-top:1px solid var(--line);padding-top:8px;font-size:13px}
+.desk .total-panel .attention{color:#7e541c;background:#fff5e3;border-radius:5px;padding:7px}
+.desk .notice{color:#255c39;background:#e8f4ea;border:1px solid #c4ddca;border-radius:8px;align-items:center;gap:8px;margin-bottom:12px;padding:6px 10px;font-size:13px;display:flex}
+.desk .notice .icon-button{margin-left:auto}
+.desk .notice.bad{color:#8b3731;background:#fcecea;border-color:#eccac5}
+.desk .history-row{border-top:1px solid var(--line);flex-wrap:wrap;align-items:center;gap:10px;padding:8px 0;font-size:12px;display:flex}
+.desk .history-row strong:first-child{min-width:155px}
+.desk .template-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.desk .template-card{flex-direction:column;gap:10px;padding:15px;display:flex}
+.desk .template-top,.desk .template-actions{justify-content:space-between;align-items:center;gap:8px;display:flex}
+.desk .template-card p{color:var(--muted);margin-bottom:8px;font-size:13px}
+.desk .template-actions{flex-wrap:wrap;margin-top:auto}
+.desk .compare-panel table{min-width:490px}
+.desk .compare-panel .button{margin-left:10px}
+.desk .pick-list{flex-wrap:wrap;gap:8px;display:flex}
+.desk .pick-list label{border:1px solid var(--line);border-radius:8px;align-items:center;gap:6px;padding:4px 8px;font-size:13px;display:flex}
+.desk .pick-list small{color:var(--muted)}
+.desk .calculator-panel{max-width:620px}
+.desk .policy-note{padding-top:10px}
+.desk .proposal-wrap{max-width:820px;margin:auto}
+.desk .proposal-tools{flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px;display:flex}
+.desk .proposal-tools label{align-items:center;display:flex}
+.desk .proposal{border:1px solid var(--line);background:#fff;border-radius:12px;padding:clamp(18px,5vw,50px)}
+.desk .proposal-top,.desk .proposal-title{align-items:center;gap:12px;display:flex}
+.desk .proposal-top p,.desk .proposal-title>div:last-child{color:var(--muted);font-size:12px}
+.desk .proposal-title{border-top:2px solid #227354;justify-content:space-between;margin:20px 0 15px;padding-top:20px}
+.desk .proposal-title h1{font-size:clamp(28px,4vw,39px)}
+.desk .proposal-client{font-size:14px;line-height:1.6}
+.desk .proposal section{margin:20px 0;font-size:14px}
+.desk .proposal section h3{margin-bottom:8px}
+.desk .proposal td:last-child,.desk .proposal th:last-child{text-align:right}
+.desk .multiline{white-space:pre-wrap}
+.desk .signature{grid-template-columns:2fr 1fr;gap:25px;margin-top:40px;font-size:12px;display:grid}
+.desk .signature span{border-top:1px solid #8b9991;padding-top:6px}
+@media (max-width:1100px){
+  .desk .shell{grid-template-columns:211px minmax(0,1fr)}
+  .desk .content,.desk .topbar,.desk .main-footer{padding-left:22px;padding-right:22px}
+  .desk .selects{gap:5px}
+  .desk .selects select{max-width:154px}
+  .desk .company-card{padding:9px}
+  .desk .company-card>svg{display:none}
+}
+@media (max-width:860px){
+  .desk .shell{display:block}
+  .desk .sidebar{z-index:3;width:239px;display:none;position:fixed;top:0;left:0;box-shadow:0 0 0 100vmax #09271d77}
+  .desk .sidebar.mobile-open{display:flex}
+  .desk .mobile-menu{display:inline-grid!important}
+  .desk .sidebar.mobile-open .wordmark{margin-bottom:24px}
+  .desk .content{padding-top:22px}
+  .desk .editor-grid{grid-template-columns:minmax(0,1fr) minmax(213px,30%)}
+}
+@media (max-width:650px){
+  .desk .content,.desk .topbar,.desk .main-footer{padding-left:13px;padding-right:13px}
+  .desk .topbar{height:52px}
+  .desk .page-heading{flex-direction:column;align-items:flex-start;gap:12px}
+  .desk .dashboard-heading{gap:10px}
+  .desk .metrics,.desk .company-grid,.desk .template-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .desk .metric{padding:10px}
+  .desk .metric strong{font-size:23px}
+  .desk .metric>div{font-size:11px}
+  .desk .metric-icon{width:26px;height:26px}
+  .desk .filters{flex-direction:column;padding:0 10px 10px}
+  .desk .table-heading{padding:12px 10px}
+  .desk .search{flex:auto;max-width:none}
+  .desk .selects select{max-width:100%;font-size:12px}
+  .desk .editor-grid{flex-direction:column-reverse;display:flex}
+  .desk .editor-grid>*{width:100%}
+  .desk .total-panel{position:static}
+  .desk .pricing-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .desk .section{padding:12px}
+  .desk .private{font-size:10px}
+  .desk .crumb{gap:5px;font-size:12px}
+}
+@media (max-width:380px){
+  .desk .template-grid,.desk .pricing-fields{grid-template-columns:1fr}
+}
+@media print{
+  .desk,.desk .shell{background:#fff;display:block}
+  .desk .sidebar,.desk .topbar,.desk .main-footer,.desk .proposal-tools,.desk .notice{display:none!important}
+  .desk .content,.desk .proposal-wrap,.desk .proposal{border:0;width:100%;max-width:none;margin:0;padding:0}
+  .desk .proposal section,.desk .signature{break-inside:avoid}
+  .desk .proposal thead{display:table-header-group}
+}
+}
+@media print{@page{margin:15mm}}
+
+/* Additions for the multi-company version (not in the original). */
+@layer components {
+.desk a.button,.desk a.text-button{text-decoration:none;color:inherit}
+.desk a.button.primary{color:#fff}
+.desk .side-group a,.desk .side-group button{text-decoration:none}
+.desk .company-logo{object-fit:contain;background:#fff;flex:none}
+.desk .company-logo.dot{width:18px;height:18px;border-radius:4px;margin:0 -1px}
+.desk .company-logo.badge{width:34px;height:34px;border-radius:50%}
+.desk .company-logo.logo{max-width:160px;max-height:56px}
+.desk .topbar-right{display:flex;align-items:center;gap:14px}
+.desk .user-button{display:flex;align-items:center;gap:6px;background:0 0;border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:12px;font-weight:700}
+.desk .user-button small{color:var(--muted);font-weight:400}
+.desk .sidebar-scrim{display:none}
+.desk .sidebar{scrollbar-width:none}
+.desk .flags{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.desk .flag{border-radius:20px;padding:2px 7px;font-size:10px;font-weight:700;color:#7e541c;background:#fff5e3}
+.desk .form-error{color:#993e3a;font-size:12px;font-weight:400}
+.desk .pager{display:flex;gap:10px}
+.desk .pager .active{text-decoration:underline}
+.desk .readonly-note{color:var(--muted);font-size:12px}
+@media (max-width:860px){.desk .sidebar-scrim{display:block;position:fixed;inset:0;z-index:2}}
+@media (max-width:650px){.desk .user-button span,.desk .user-button small{display:none}}
+}
+@layer components {
+.desk .status-field{display:grid;gap:6px}
+.desk .status-label{color:#475a50;font-size:12px;font-weight:700}
+.desk .status-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-height:34px}
+}
+@layer components {
+.desk .logo-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:6px}
+.desk .logo-preview{width:120px;height:64px;border:1px solid var(--line);border-radius:10px;display:grid;place-items:center;overflow:hidden;font-weight:800;font-size:20px}
+.desk .logo-preview img{max-width:100%;max-height:100%;object-fit:contain}
+.desk .color-input{width:44px;padding:2px;border:0;height:32px;flex:none}
+.desk .company-cell{display:inline-flex;align-items:center;gap:10px}
+.desk .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+}
+@layer components{.desk .row-actions{display:inline-flex;align-items:center;gap:8px}}
+@layer components {
+.desk .overview-metrics{grid-template-columns:repeat(5,minmax(0,1fr))}
+.desk .overview-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px;margin-top:14px;align-items:start}
+.desk .activity-list{list-style:none;margin:0;padding:0 19px 12px;font-size:13px}
+.desk .activity-list li{border-top:1px solid #e8eee9;padding:10px 0;line-height:1.5}
+.desk .activity-list small{display:block;color:var(--muted);font-size:11px}
+@media (max-width:1100px){.desk .overview-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.desk .overview-grid{grid-template-columns:1fr}}
+@media (max-width:650px){.desk .overview-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+}
+
+/* Sign-in pages in the desk palette. Overrides the starter-kit tokens locally. */
+.desk-auth{
+    --primary:#185942;--primary-foreground:#fff;--ring:#33856b;--background:#fff;--foreground:#162721;
+    --muted-foreground:#5c6b64;--border:#dce4de;--input:#dce4de;--radius:8px;
+    min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px 16px;
+    background:radial-gradient(circle at 20% 10%,#1c4a3c 0,#102c25 55%);font-family:Arial,Helvetica,sans-serif;color:#162721;
+}
+.desk-auth-card{width:100%;max-width:400px;background:#fff;border-radius:13px;padding:28px;display:flex;flex-direction:column;gap:22px;box-shadow:0 20px 50px #0000004d}
+.desk-auth-brand{display:flex;align-items:center;gap:10px}
+.desk-auth-brand img{width:42px;height:42px;border-radius:11px}
+.desk-auth-brand div{display:grid;gap:4px}
+.desk-auth-brand strong{letter-spacing:.095em;font-size:13px}
+.desk-auth-brand span{letter-spacing:.21em;color:#5c6b64;font-size:9px}
+.desk-auth-heading h1{font-size:24px;letter-spacing:-.04em;margin:0}
+.desk-auth-heading p{color:#5c6b64;font-size:13px;margin:6px 0 0}
+.desk-auth-foot{color:#a9c7b8;font-size:11px;margin:0}
+@layer components {
+.desk .wordmark{margin-bottom:18px}
+.desk .company-switcher{display:flex;align-items:center;gap:10px;width:100%;margin:0 0 26px;padding:9px 10px;text-align:left;color:#e8f4ee;background:#173a30;border:1px solid #2e5446;border-radius:10px}
+.desk .company-switcher:hover{background:#1d4639}
+.desk .company-switcher.static{cursor:default}
+.desk .company-switcher.static:hover{background:#173a30}
+.desk .company-switcher-text{display:grid;gap:3px;flex:1;min-width:0}
+.desk .company-switcher-text small{letter-spacing:.16em;color:#a0bdb0;font-size:9px;font-weight:700}
+.desk .company-switcher-text strong{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.desk .company-switcher svg{color:#a0bdb0}
+}
+.company-option{gap:10px}
+.company-option .company-dot{width:8px;height:8px;border-radius:50%;flex:none}
+.company-option .company-logo.dot{width:18px;height:18px;border-radius:4px;object-fit:contain}
+/* Dialog content is portaled outside the shell; it wraps its body in .desk. */
+.desk-dialog{padding:22px;border-radius:13px}
+@layer components {
+.desk-dialog > .desk{background:transparent;display:grid;gap:6px}
+.desk-dialog .desk h2{font-size:22px}
+.desk .dialog-actions{margin-top:6px}
+}
+/* Wide company logos (logos are typically ~3:1). */
+@layer components {
+.desk .company-switcher.has-logo{flex-wrap:wrap;row-gap:8px}
+.desk .switcher-logo{flex:0 0 100%;display:grid;place-items:center;height:64px;padding:6px 10px;background:#fff;border-radius:7px}
+.desk .switcher-logo img{max-width:100%;max-height:100%;object-fit:contain}
+.desk .brand-logo{display:inline-grid;place-items:center;flex:none;width:96px;height:40px;padding:3px 6px;background:#fff;border:1px solid var(--line);border-radius:8px}
+.desk .brand-logo img{max-width:100%;max-height:100%;object-fit:contain}
+.desk .template-top .brand-logo{width:110px;height:44px}
+.desk .company-logo.logo{max-width:240px;max-height:90px}
+}
+.company-option .option-logo{display:inline-grid;place-items:center;flex:none;width:64px;height:28px;border-radius:5px;background:#fff;border:1px solid #e0e7e2}
+.company-option .option-logo.empty{border-color:transparent;background:transparent}
+.company-option .option-logo img{max-width:100%;max-height:100%;object-fit:contain;padding:2px}
+/* Explicit height caps so square/round logos fit as well as wide ones. */
+@layer components {
+.desk .switcher-logo{overflow:hidden}
+.desk .switcher-logo img{max-height:52px;width:auto}
+.desk .brand-logo{overflow:hidden}
+.desk .brand-logo img{max-height:32px;width:auto}
+.desk .template-top .brand-logo img{max-height:36px}
+}
+.company-option .option-logo{overflow:hidden}
+.company-option .option-logo img{max-height:24px;width:auto}
+/* Calculator: inputs left, live result floating on the right (pinned to the bottom on phones). */
+@layer components {
+.desk .calculator-grid{display:grid;grid-template-columns:minmax(0,620px) minmax(240px,320px);gap:15px;align-items:start}
+.desk .calculator-grid .fields.one{grid-template-columns:1fr}
+.desk .calculator-result{position:sticky;top:16px}
+.desk .calculator-result .total-row strong{font-size:28px}
+.desk .calculator-result .workings{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px;margin-top:8px;overflow-wrap:anywhere}
+@media (max-width:860px){.desk .calculator-grid{grid-template-columns:1fr}}
+@media (max-width:650px){
+  .desk .calculator-grid{padding-bottom:110px}
+  .desk .calculator-result{position:fixed;left:13px;right:13px;bottom:12px;top:auto;z-index:2;padding:12px 14px;box-shadow:0 10px 30px #0f2a2238}
+  .desk .calculator-result h3,.desk .calculator-result dl{display:none}
+  .desk .calculator-result .total-row{border-top:0;padding:0}
+  .desk .calculator-result .workings{margin-top:4px}
+}
+}
+/* Outline the whole $/% field on focus, not just the inner input. */
+@layer components {
+.desk .unit-input:focus-within{outline:2px solid #33856b;outline-offset:2px}
+.desk .unit-input input:focus-visible{outline:none}
+}
+/* Calculator keypad. */
+@layer components {
+.desk .calc-fields label{border-radius:9px;padding:6px;margin:-6px}
+.desk .calc-fields label.calc-active{background:var(--soft)}
+.desk .calc-hint{color:#36715c;font-weight:700;font-size:12px}
+.desk .keypad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:18px;max-width:420px;user-select:none}
+.desk .keypad button{height:52px;border-radius:10px;border:1px solid #dce5de;background:#fff;font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .1s,transform .05s}
+.desk .keypad button:hover{background:#f4f8f5}
+.desk .keypad button:active{transform:scale(.97);background:#eaf2ec}
+.desk .keypad .op{background:var(--soft);color:#17664e;border-color:#cfe3d6}
+.desk .keypad .fn{background:#f2f6f3;color:#475a50;font-size:17px}
+.desk .keypad button[aria-label="Equals"]{background:#185942;color:#fff;border-color:#185942}
+.desk .keypad .next{grid-column:span 2;background:#185942;color:#fff;border-color:#185942;font-size:15px}
+.desk .keypad .next:hover,.desk .keypad button[aria-label="Equals"]:hover{background:#104332}
+@media (max-width:650px){.desk .keypad{max-width:none}.desk .keypad button{height:56px}}
+}
+/* Calculator: compact layout — stacked fields beside the keypad, result alongside. */
+@layer components {
+.desk .calculator-grid{grid-template-columns:minmax(0,640px) minmax(260px,340px)}
+.desk .calc-body{display:grid;grid-template-columns:minmax(200px,1fr) minmax(260px,300px);gap:22px;align-items:start;margin-top:12px}
+.desk .calc-body .fields{margin-top:0}
+.desk .calc-body .keypad{margin-top:0;max-width:none}
+.desk .calc-clear{justify-content:flex-start;margin-top:14px}
+@media (max-width:1100px){.desk .calculator-grid{grid-template-columns:minmax(0,1fr)}.desk .calculator-result{position:static}}
+@media (max-width:650px){.desk .calc-body{grid-template-columns:1fr}.desk .calculator-result{position:fixed}}
+}
+/* Floating calculator (bottom-right on every desk page). */
+@layer components {
+.desk .calc-fab{position:fixed;right:24px;bottom:24px;z-index:30;width:54px;height:54px;border-radius:50%;border:0;background:#185942;color:#fff;display:grid;place-items:center;box-shadow:0 10px 24px #0f3c2c4d}
+.desk .calc-fab:hover{background:#104332}
+.desk .calc-fab.open{background:#fff;color:#185942;border:1px solid var(--line)}
+.desk .floating-calc{position:fixed;right:24px;bottom:90px;z-index:30;width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 120px);overflow:auto;padding:14px 16px 16px;box-shadow:0 22px 50px #0f2a2240}
+.desk .floating-calc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.desk .floating-calc-head strong{display:flex;align-items:center;gap:7px;font-size:14px}
+.desk .quick-calc.compact .calc-body{grid-template-columns:minmax(150px,1fr) 250px;gap:16px;margin-top:0}
+.desk .quick-calc.compact .keypad{gap:6px}
+.desk .quick-calc.compact .keypad button{height:42px;font-size:17px}
+.desk .quick-calc.compact .keypad .next{font-size:14px}
+.desk .quick-calc-result{border-top:1px solid var(--line);margin-top:14px;padding-top:10px}
+.desk .quick-calc-result .total-row{border-top:0;padding:0}
+.desk .quick-calc-result .total-row small{color:var(--muted);font-weight:400}
+.desk .quick-calc-result .workings{color:var(--muted);font-size:12px;margin:4px 0 10px;font-variant-numeric:tabular-nums}
+.desk .quick-calc-actions{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
+@media (max-width:650px){
+  .desk .calc-fab{right:14px;bottom:14px}
+  .desk .floating-calc{right:8px;left:8px;bottom:78px;width:auto}
+  .desk .quick-calc.compact .calc-body{grid-template-columns:1fr}
+}
+@media print{.desk .calc-fab,.desk .floating-calc{display:none!important}}
+}
+/* Services page. */
+@layer components {
+.desk .trade-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;align-items:start}
+.desk .trade-card{margin:0}
+.desk .trade-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.desk .trade-head h3{margin:0;flex:1}
+.desk .service-list{list-style:none;margin:0 0 10px;padding:0}
+.desk .service-list li{display:flex;align-items:center;gap:4px;border-top:1px solid #e8eee9;padding:6px 0;font-size:13px}
+.desk .service-list li input{flex:1;padding:6px 8px}
+.desk .service-name{flex:1;display:flex;align-items:center;gap:8px}
+.desk .service-name small{color:var(--muted);font-size:11px}
+.desk .service-list li.retired .service-name{color:var(--muted);text-decoration:line-through}
+.desk .service-list li.retired .service-name small{text-decoration:none}
+.desk .add-service{display:flex;gap:6px}
+.desk .add-service input{flex:1}
+.desk .icon-picker{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.desk .icon-picker button{width:38px;height:38px;border:1px solid #dce5de;border-radius:8px;background:#fff;display:grid;place-items:center;color:#475a50}
+.desk .icon-picker button.selected{border-color:#185942;background:var(--soft);color:#185942;box-shadow:0 0 0 2px #18594233}
+}
+/* Company settings: services grouped by trade; Services page: offered-by chips. */
+@layer components {
+.desk .service-trades{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.desk .service-trade{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.desk .service-trade-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.desk .service-trade-head .brand-icon{width:30px;height:30px}
+.desk .service-trade-head strong{flex:1;font-size:13px}
+.desk .service-trade-head small{color:var(--muted);font-size:11px}
+.desk .service-trade .pick-list label.on{border-color:#acc8b7;background:var(--soft)}
+.desk .offered-by{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.desk .offered-by em{color:var(--muted);font-size:11px}
+.desk .offered-chip{font-size:10px;font-weight:700;color:#53615b;background:#edf0ed;border-radius:20px;padding:2px 7px}
+.desk .offered-chip.current{color:#27633f;background:#e6f5e9}
+.desk .service-list li{align-items:flex-start}
+}
+@layer components{.desk .trades-toggle{margin-top:10px}}
+/* Public proposal (customer share link) and signature. */
+@layer components {
+.desk.public-proposal{min-height:100vh;padding:28px 16px 48px}
+.desk .public-from{color:var(--muted);font-size:13px}
+.desk .signature.signed span{display:grid;gap:4px}
+.desk .signed-name{font-family:'Brush Script MT','Segoe Script','Bradley Hand',cursive;font-size:26px;font-weight:400;color:#102d26;line-height:1.1}
+.desk .authorize-box{margin-top:36px;border:1px dashed #acc8b7;border-radius:12px;padding:18px;display:grid;gap:10px;background:#fbfdfb;break-inside:avoid}
+.desk .authorize-box h3{display:flex;align-items:center;gap:8px;margin:0}
+.desk .authorize-box .muted{margin:0}
+.desk .authorize-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:end}
+.desk .authorize-row label{display:grid;gap:6px;font-size:12px;font-weight:700;color:#475a50}
+.desk .signature-preview{border-bottom:1px solid #8b9991;min-height:40px;font-family:'Brush Script MT','Segoe Script','Bradley Hand',cursive;font-size:28px;color:#102d26;padding:0 4px}
+.desk .agree{display:flex;align-items:flex-start;gap:8px;font-size:13px}
+.desk .agree input{margin-top:2px}
+.desk .authorize-box .button{justify-self:start}
+.desk .authorized-note{margin-top:14px}
+@media (max-width:650px){.desk .authorize-row{grid-template-columns:1fr}}
+@media print{.desk .authorize-box,.desk .authorized-note,.desk .public-from{display:none!important}.desk.public-proposal{padding:0}}
+}
+@layer components {
+.desk .share-url{display:flex;gap:8px;margin-top:6px}
+.desk .share-url input{flex:1;font-family:ui-monospace,Menlo,monospace;font-size:12px}
+.desk .share-facts{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 14px;color:var(--muted);font-size:12px}
+.desk .share-expiry{display:grid;gap:6px;font-size:12px;font-weight:700;color:#475a50;margin-top:6px}
+.desk .share-expiry select{width:100%}
+.desk .authorized-banner{gap:6px}
+}
+/* Signed: the name sits on the line, the label below it. */
+@layer components {
+.desk .signature.signed span{border-top:0;padding-top:0}
+.desk .signature.signed .signed-name{border-bottom:1px solid #8b9991;padding:0 2px 6px;margin-bottom:6px}
+}
+/* Builder right column: pricing summary with history below; the column stays in view. */
+@layer components {
+.desk .editor-side{position:sticky;top:16px;display:grid;gap:14px;max-height:calc(100vh - 32px);overflow:auto;scrollbar-width:thin}
+.desk .editor-side .total-panel{position:static}
+.desk .revision-panel{padding:16px 18px}
+.desk .revision-panel h3{display:flex;align-items:center;gap:7px;margin-bottom:8px}
+.desk .revision-list{list-style:none;margin:0;padding:0}
+.desk .revision-list li{border-top:1px solid var(--line);padding:9px 0;display:grid;gap:4px;font-size:12px}
+.desk .revision-top{display:flex;align-items:center;gap:6px}
+.desk .revision-total{margin-left:auto}
+.desk .revision-current{font-size:10px;font-weight:700;color:#27633f;background:#e6f5e9;border-radius:20px;padding:1px 7px}
+.desk .revision-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px;color:var(--muted)}
+.desk .revision-list .text-button{font-size:12px;justify-self:start}
+.desk .revision-hint{font-size:11px;margin-top:6px}
+@media (max-width:650px){.desk .editor-side{position:static;max-height:none;overflow:visible}}
+}
+/* Destructive actions. */
+@layer components {
+.desk .button.danger{color:#fff;background:#b42318;border-color:#b42318;box-shadow:0 2px 2px #7a1a1215}
+.desk .button.danger:hover{background:#912018;border-color:#912018}
+.desk .button.danger-outline{color:#b42318;background:#fff;border-color:#f1c4bf}
+.desk .button.danger-outline:hover{background:#fdf0ee;border-color:#e4a59e}
+}
+@layer components{.desk .unsaved-actions{justify-content:space-between;margin-top:14px}}
+/* Grouped sidebar navigation: tighter spacing between groups than the original single list. */
+@layer components {
+.desk .side-nav{display:grid;gap:18px;margin-bottom:24px}
+.desk .side-nav .side-group{margin-bottom:0;gap:2px}
+.desk .side-nav .side-group button{min-height:36px;padding:9px 11px}
+.desk .side-nav .side-label{margin-bottom:4px}
+}
