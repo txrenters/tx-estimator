@@ -75,7 +75,8 @@ export function evaluate(text: string): number | null {
     // Second pass: + and −.
     let result = terms[0]!;
     for (let i = 0; i < addOps.length; i++) {
-        result = addOps[i] === '+' ? result + terms[i + 1]! : result - terms[i + 1]!;
+        result =
+            addOps[i] === '+' ? result + terms[i + 1]! : result - terms[i + 1]!;
     }
 
     return Number.isFinite(result) ? Math.max(0, result) : null;

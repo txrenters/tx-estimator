@@ -5,20 +5,33 @@ import { money } from '@/lib/format';
 import type { Line } from '@/types/desk';
 
 const lines = defineModel<Line[]>({ required: true });
-const { markup, readonly = false, errors = {} } = defineProps<{
+const {
+    markup,
+    readonly = false,
+    errors = {},
+} = defineProps<{
     markup?: number;
     readonly?: boolean;
     errors?: Record<string, string>;
 }>();
 
-const blank = (): Line => ({ name: '', qty: 1, unit: 'job', labor: 0, materials: 0, fixed: null });
+const blank = (): Line => ({
+    name: '',
+    qty: 1,
+    unit: 'job',
+    labor: 0,
+    materials: 0,
+    fixed: null,
+});
 
 function num(value: string, max = 100000000): number {
     return Math.min(max, Math.max(0, Number(value) || 0));
 }
 
 function update(index: number, patch: Partial<Line>) {
-    lines.value = lines.value.map((line, i) => (i === index ? { ...line, ...patch } : line));
+    lines.value = lines.value.map((line, i) =>
+        i === index ? { ...line, ...patch } : line,
+    );
 }
 
 function remove(index: number) {
@@ -57,48 +70,116 @@ function lineError(index: number): string | undefined {
                                 placeholder="Work or material"
                                 aria-label="Item"
                                 :disabled="readonly"
-                                @input="update(i, { name: ($event.target as HTMLInputElement).value })"
+                                @input="
+                                    update(i, {
+                                        name: (
+                                            $event.target as HTMLInputElement
+                                        ).value,
+                                    })
+                                "
                             />
                         </td>
                         <td>
                             <input
-                                type="number" min="0" step="any" aria-label="Qty"
-                                :value="line.qty" :disabled="readonly"
-                                @input="update(i, { qty: num(($event.target as HTMLInputElement).value, 1000000) })"
+                                type="number"
+                                min="0"
+                                step="any"
+                                aria-label="Qty"
+                                :value="line.qty"
+                                :disabled="readonly"
+                                @input="
+                                    update(i, {
+                                        qty: num(
+                                            ($event.target as HTMLInputElement)
+                                                .value,
+                                            1000000,
+                                        ),
+                                    })
+                                "
                             />
                         </td>
                         <td>
                             <input
-                                :value="line.unit" aria-label="Unit" :disabled="readonly"
-                                @input="update(i, { unit: ($event.target as HTMLInputElement).value })"
+                                :value="line.unit"
+                                aria-label="Unit"
+                                :disabled="readonly"
+                                @input="
+                                    update(i, {
+                                        unit: (
+                                            $event.target as HTMLInputElement
+                                        ).value,
+                                    })
+                                "
                             />
                         </td>
                         <td>
                             <input
-                                type="number" min="0" step="any" aria-label="Labor / unit"
-                                :value="line.labor" :disabled="readonly"
-                                @input="update(i, { labor: num(($event.target as HTMLInputElement).value) })"
+                                type="number"
+                                min="0"
+                                step="any"
+                                aria-label="Labor / unit"
+                                :value="line.labor"
+                                :disabled="readonly"
+                                @input="
+                                    update(i, {
+                                        labor: num(
+                                            ($event.target as HTMLInputElement)
+                                                .value,
+                                        ),
+                                    })
+                                "
                             />
                         </td>
                         <td>
                             <input
-                                type="number" min="0" step="any" aria-label="Materials / unit"
-                                :value="line.materials" :disabled="readonly"
-                                @input="update(i, { materials: num(($event.target as HTMLInputElement).value) })"
+                                type="number"
+                                min="0"
+                                step="any"
+                                aria-label="Materials / unit"
+                                :value="line.materials"
+                                :disabled="readonly"
+                                @input="
+                                    update(i, {
+                                        materials: num(
+                                            ($event.target as HTMLInputElement)
+                                                .value,
+                                        ),
+                                    })
+                                "
                             />
                         </td>
                         <td>
                             <input
-                                type="number" min="0" step="any" aria-label="Fixed sell / unit"
-                                :value="line.fixed ?? ''" :disabled="readonly"
-                                @input="update(i, { fixed: ($event.target as HTMLInputElement).value === '' ? null : num(($event.target as HTMLInputElement).value) })"
+                                type="number"
+                                min="0"
+                                step="any"
+                                aria-label="Fixed sell / unit"
+                                :value="line.fixed ?? ''"
+                                :disabled="readonly"
+                                @input="
+                                    update(i, {
+                                        fixed:
+                                            ($event.target as HTMLInputElement)
+                                                .value === ''
+                                                ? null
+                                                : num(
+                                                      (
+                                                          $event.target as HTMLInputElement
+                                                      ).value,
+                                                  ),
+                                    })
+                                "
                             />
                         </td>
-                        <td v-if="markup !== undefined">{{ money(lineSell(line, markup)) }}</td>
+                        <td v-if="markup !== undefined">
+                            {{ money(lineSell(line, markup)) }}
+                        </td>
                         <td>
                             <button
                                 v-if="!readonly && lines.length > 1"
-                                type="button" class="icon-button" aria-label="Remove line"
+                                type="button"
+                                class="icon-button"
+                                aria-label="Remove line"
                                 @click="remove(i)"
                             >
                                 <Trash2 :size="15" />
@@ -106,13 +187,20 @@ function lineError(index: number): string | undefined {
                         </td>
                     </tr>
                     <tr v-if="lineError(i)">
-                        <td colspan="8" class="form-error">{{ lineError(i) }}</td>
+                        <td colspan="8" class="form-error">
+                            {{ lineError(i) }}
+                        </td>
                     </tr>
                 </template>
             </tbody>
         </table>
     </div>
-    <button v-if="!readonly" type="button" class="button secondary compact" @click="lines = [...lines, blank()]">
+    <button
+        v-if="!readonly"
+        type="button"
+        class="button secondary compact"
+        @click="lines = [...lines, blank()]"
+    >
         <Plus :size="15" /> Add line
     </button>
 </template>

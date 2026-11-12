@@ -15,13 +15,20 @@ const emit = defineEmits<{ menu: [] }>();
 
 const page = usePage();
 const desk = computed(() => page.props.desk as DeskProps);
-const scope = computed(() => desk.value.currentCompany?.name ?? 'All companies');
+const scope = computed(
+    () => desk.value.currentCompany?.name ?? 'All companies',
+);
 </script>
 
 <template>
     <header class="topbar">
         <div class="crumb">
-            <button type="button" class="icon-button mobile-menu" aria-label="Open menu" @click="emit('menu')">
+            <button
+                type="button"
+                class="icon-button mobile-menu"
+                aria-label="Open menu"
+                @click="emit('menu')"
+            >
                 <Menu :size="18" />
             </button>
             <span>Workspace</span>
@@ -32,13 +39,21 @@ const scope = computed(() => desk.value.currentCompany?.name ?? 'All companies')
             <span class="private"><i />{{ scope }}</span>
             <DropdownMenu>
                 <DropdownMenuTrigger as-child>
-                    <button type="button" class="user-button" data-test="desk-user-menu">
+                    <button
+                        type="button"
+                        class="user-button"
+                        data-test="desk-user-menu"
+                    >
                         <span>{{ desk.user.name }}</span>
                         <small>{{ desk.user.roleLabel }}</small>
                         <ChevronDown :size="14" />
                     </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent class="min-w-56 rounded-lg" align="end" :side-offset="6">
+                <DropdownMenuContent
+                    class="min-w-56 rounded-lg"
+                    align="end"
+                    :side-offset="6"
+                >
                     <UserMenuContent :user="page.props.auth.user" />
                 </DropdownMenuContent>
             </DropdownMenu>

@@ -31,8 +31,14 @@ const props = defineProps<{
 const ids = computed(() => props.selected.map((s) => s.id));
 
 function toggle(id: number) {
-    const next = ids.value.includes(id) ? ids.value.filter((x) => x !== id) : [...ids.value, id].slice(0, 3);
-    router.get('/compare', { ids: next }, { preserveScroll: true, preserveState: true, replace: true });
+    const next = ids.value.includes(id)
+        ? ids.value.filter((x) => x !== id)
+        : [...ids.value, id].slice(0, 3);
+    router.get(
+        '/compare',
+        { ids: next },
+        { preserveScroll: true, preserveState: true, replace: true },
+    );
 }
 
 function duplicate(id: number) {
@@ -47,7 +53,11 @@ const rows: [string, (e: Selected) => string][] = [
     ['Discount', (e) => money(e.discount)],
     ['Trip charge', (e) => money(e.trip)],
     ['Total', (e) => money(e.total)],
-    ['Gross margin', (e) => (e.margin === null ? 'Needs pricing' : `${e.margin.toFixed(1)}%`)],
+    [
+        'Gross margin',
+        (e) =>
+            e.margin === null ? 'Needs pricing' : `${e.margin.toFixed(1)}%`,
+    ],
     ['Margin target', (e) => `${e.target}%`],
 ];
 </script>
@@ -58,7 +68,10 @@ const rows: [string, (e: Selected) => string][] = [
         <div>
             <span class="eyebrow">PRICING REVIEW</span>
             <h1>Compare estimates</h1>
-            <p>Compare up to three saved estimates. Duplicate an estimate to price another option.</p>
+            <p>
+                Compare up to three saved estimates. Duplicate an estimate to
+                price another option.
+            </p>
         </div>
     </div>
 
@@ -92,17 +105,31 @@ const rows: [string, (e: Selected) => string][] = [
                 <tbody>
                     <tr>
                         <th>Approval</th>
-                        <td v-for="e in selected" :key="e.id"><StatusPill :status="e.status" /></td>
+                        <td v-for="e in selected" :key="e.id">
+                            <StatusPill :status="e.status" />
+                        </td>
                     </tr>
                     <tr v-for="[label, value] in rows" :key="label">
                         <th>{{ label }}</th>
-                        <td v-for="e in selected" :key="e.id">{{ value(e) }}</td>
+                        <td v-for="e in selected" :key="e.id">
+                            {{ value(e) }}
+                        </td>
                     </tr>
                     <tr>
                         <th>Options</th>
                         <td v-for="e in selected" :key="e.id">
-                            <Link :href="`/estimates/${e.id}/edit`" class="text-button">Open</Link>
-                            <button type="button" class="button secondary compact" @click="duplicate(e.id)">Duplicate</button>
+                            <Link
+                                :href="`/estimates/${e.id}/edit`"
+                                class="text-button"
+                                >Open</Link
+                            >
+                            <button
+                                type="button"
+                                class="button secondary compact"
+                                @click="duplicate(e.id)"
+                            >
+                                Duplicate
+                            </button>
                         </td>
                     </tr>
                 </tbody>

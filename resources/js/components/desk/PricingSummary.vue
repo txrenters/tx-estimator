@@ -8,10 +8,15 @@ const props = defineProps<{ lines: Line[]; pricing: Pricing }>();
 
 const result = computed(() => calculate(props.lines, props.pricing));
 const marginText = computed(() =>
-    result.value.incomplete || !result.value.total ? '—' : `${result.value.margin.toFixed(1)}%`,
+    result.value.incomplete || !result.value.total
+        ? '—'
+        : `${result.value.margin.toFixed(1)}%`,
 );
 const belowTarget = computed(
-    () => !result.value.incomplete && result.value.total > 0 && result.value.margin < props.pricing.target,
+    () =>
+        !result.value.incomplete &&
+        result.value.total > 0 &&
+        result.value.margin < props.pricing.target,
 );
 </script>
 
@@ -36,14 +41,23 @@ const belowTarget = computed(
             <span>Gross margin</span>
             <strong>{{ marginText }}</strong>
         </div>
-        <p>Target {{ pricing.target }}%{{ belowTarget ? ' · Below target' : '' }}</p>
+        <p>
+            Target {{ pricing.target }}%{{
+                belowTarget ? ' · Below target' : ''
+            }}
+        </p>
         <p v-if="result.incomplete" class="attention">
-            Enter direct costs for active lines to calculate margin. Check any zero-priced scope items before issuing.
+            Enter direct costs for active lines to calculate margin. Check any
+            zero-priced scope items before issuing.
         </p>
         <p v-if="result.total > pricing.authorization" class="attention">
             Above the {{ money(pricing.authorization) }} authorization limit.
         </p>
-        <p v-if="result.total > pricing.manager" class="attention">Manager review threshold exceeded.</p>
-        <p>Authorization flags are advisory. Margin is before overhead and tax.</p>
+        <p v-if="result.total > pricing.manager" class="attention">
+            Manager review threshold exceeded.
+        </p>
+        <p>
+            Authorization flags are advisory. Margin is before overhead and tax.
+        </p>
     </aside>
 </template>

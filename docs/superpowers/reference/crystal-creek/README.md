@@ -21,12 +21,12 @@ so mail must be configured.
 
 ## Roles
 
-| Role | Scope | Can |
-|---|---|---|
-| Superadmin | all companies | everything, incl. managing admins/superadmins |
-| Admin | all companies | switch companies, overview, approve, manage companies and managers/estimators |
-| Manager | one company | approve, edit any estimate, templates, pricing defaults, company settings/logo, users |
-| Estimator | one company | see company estimates, create, edit own drafts/pending/declined, submit for approval |
+| Role       | Scope         | Can                                                                                   |
+| ---------- | ------------- | ------------------------------------------------------------------------------------- |
+| Superadmin | all companies | everything, incl. managing admins/superadmins                                         |
+| Admin      | all companies | switch companies, overview, approve, manage companies and managers/estimators         |
+| Manager    | one company   | approve, edit any estimate, templates, pricing defaults, company settings/logo, users |
+| Estimator  | one company   | see company estimates, create, edit own drafts/pending/declined, submit for approval  |
 
 ## Tests
 

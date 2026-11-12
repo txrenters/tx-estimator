@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\EstimateStatus;
 use App\Support\EstimateNumber;
 use App\Support\Pricing;
+use Carbon\CarbonImmutable;
 use Database\Factories\EstimateFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
@@ -35,14 +36,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $margin
  * @property bool $incomplete
  * @property int|null $approved_by
- * @property \Carbon\CarbonImmutable|null $approved_at
+ * @property CarbonImmutable|null $approved_at
  * @property string|null $share_token
- * @property \Carbon\CarbonImmutable|null $share_expires_at
- * @property \Carbon\CarbonImmutable|null $shared_at
+ * @property CarbonImmutable|null $share_expires_at
+ * @property CarbonImmutable|null $shared_at
  * @property int $share_views
- * @property \Carbon\CarbonImmutable|null $share_viewed_at
+ * @property CarbonImmutable|null $share_viewed_at
  * @property string|null $authorized_name
- * @property \Carbon\CarbonImmutable|null $authorized_at
+ * @property CarbonImmutable|null $authorized_at
  * @property string|null $authorized_ip
  * @property-read Company $company
  * @property-read User $creator

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Database\Factories\CompanyFactory;
 use App\Support\ServiceCatalog;
+use Database\Factories\CompanyFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

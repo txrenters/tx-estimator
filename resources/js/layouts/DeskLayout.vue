@@ -12,7 +12,9 @@ const { crumb = 'Estimates' } = defineProps<{ crumb?: string }>();
 const page = usePage();
 const desk = computed(() => page.props.desk as DeskProps);
 const menuOpen = ref(false);
-const location = computed(() => desk.value?.currentCompany?.location ?? 'Greater Houston, TX');
+const location = computed(
+    () => desk.value?.currentCompany?.location ?? 'Greater Houston, TX',
+);
 </script>
 
 <template>
@@ -21,7 +23,11 @@ const location = computed(() => desk.value?.currentCompany?.location ?? 'Greater
         <FloatingCalculator />
         <div class="shell">
             <DeskSidebar :open="menuOpen" @close="menuOpen = false" />
-            <div v-if="menuOpen" class="sidebar-scrim" @click="menuOpen = false" />
+            <div
+                v-if="menuOpen"
+                class="sidebar-scrim"
+                @click="menuOpen = false"
+            />
             <div class="main">
                 <DeskTopbar :crumb="crumb" @menu="menuOpen = !menuOpen" />
                 <main class="content">
@@ -29,7 +35,10 @@ const location = computed(() => desk.value?.currentCompany?.location ?? 'Greater
                 </main>
                 <footer class="main-footer">
                     <span>Crystal Creek Estimating Desk</span>
-                    <span>{{ location }}<span class="footer-dot">•</span>USD</span>
+                    <span
+                        >{{ location
+                        }}<span class="footer-dot">•</span>USD</span
+                    >
                 </footer>
             </div>
         </div>

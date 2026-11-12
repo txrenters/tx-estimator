@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $action submitted|withdrawn|approved|declined|reverted_to_draft|shared|unshared|customer_authorized|authorization_cleared
  * @property string|null $from_status
  * @property string $to_status
- * @property \Carbon\CarbonImmutable $created_at
+ * @property CarbonImmutable $created_at
  * @property-read Estimate $estimate
  * @property-read User|null $user
  * @property-read Company $company

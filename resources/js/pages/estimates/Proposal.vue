@@ -23,7 +23,11 @@ function print() {
     <Head :title="`${proposal.title || 'Service proposal'} — Proposal`" />
     <div class="proposal-wrap">
         <div class="proposal-tools">
-            <Link :href="`/estimates/${proposal.id}/edit`" class="button secondary"><ArrowLeft :size="16" /> Back to estimate</Link>
+            <Link
+                :href="`/estimates/${proposal.id}/edit`"
+                class="button secondary"
+                ><ArrowLeft :size="16" /> Back to estimate</Link
+            >
             <label>
                 Audience
                 <select v-model="audience">
@@ -31,9 +35,15 @@ function print() {
                     <option>Property owner</option>
                 </select>
             </label>
-            <button type="button" class="button primary" @click="print"><Printer :size="16" /> Print / Save PDF</button>
+            <button type="button" class="button primary" @click="print">
+                <Printer :size="16" /> Print / Save PDF
+            </button>
         </div>
 
-        <ProposalDocument :proposal="proposal" :audience="audience" :authorization="authorization" />
+        <ProposalDocument
+            :proposal="proposal"
+            :audience="audience"
+            :authorization="authorization"
+        />
     </div>
 </template>

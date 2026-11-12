@@ -2,7 +2,11 @@
 import type { Pricing } from '@/types/desk';
 
 const pricing = defineModel<Pricing>({ required: true });
-const { readonly = false, errors = {}, prefix = '' } = defineProps<{
+const {
+    readonly = false,
+    errors = {},
+    prefix = '',
+} = defineProps<{
     readonly?: boolean;
     errors?: Record<string, string>;
     prefix?: string;
@@ -31,15 +35,21 @@ function set(key: keyof Pricing, raw: string) {
             <div class="unit-input">
                 <span>{{ unit }}</span>
                 <input
-                    type="number" min="0" step="any"
-                    :max="key === 'discount' || key === 'target' ? 100 : undefined"
+                    type="number"
+                    min="0"
+                    step="any"
+                    :max="
+                        key === 'discount' || key === 'target' ? 100 : undefined
+                    "
                     :aria-label="label"
                     :value="pricing[key]"
                     :disabled="readonly"
                     @input="set(key, ($event.target as HTMLInputElement).value)"
                 />
             </div>
-            <span v-if="errors[prefix + key]" class="form-error">{{ errors[prefix + key] }}</span>
+            <span v-if="errors[prefix + key]" class="form-error">{{
+                errors[prefix + key]
+            }}</span>
         </label>
     </div>
 </template>

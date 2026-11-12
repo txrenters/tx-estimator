@@ -13,7 +13,12 @@ defineProps<{
 <template>
     <article class="proposal">
         <div class="proposal-top">
-            <img v-if="proposal.company.logoUrl" :src="proposal.company.logoUrl" :alt="`${proposal.company.name} logo`" class="company-logo logo" />
+            <img
+                v-if="proposal.company.logoUrl"
+                :src="proposal.company.logoUrl"
+                :alt="`${proposal.company.name} logo`"
+                class="company-logo logo"
+            />
             <BrandIcon v-else :company="proposal.company" />
             <div>
                 <strong>{{ proposal.company.name }}</strong>
@@ -26,13 +31,12 @@ defineProps<{
                 <span class="eyebrow">{{ audience }} proposal</span>
                 <h1>{{ proposal.title || 'Service proposal' }}</h1>
             </div>
-            <div>
-                {{ proposal.number }}<br />{{ date(proposal.date) }}
-            </div>
+            <div>{{ proposal.number }}<br />{{ date(proposal.date) }}</div>
         </div>
 
         <div class="proposal-client">
-            <strong>{{ proposal.client || 'Prepared for' }}</strong><br />
+            <strong>{{ proposal.client || 'Prepared for' }}</strong
+            ><br />
             {{ proposal.address || 'Service address' }}<br />
             {{ proposal.service }}
         </div>
@@ -87,7 +91,9 @@ defineProps<{
                 {{ audience }} authorization
             </span>
             <span>
-                <strong class="signed-name">{{ date(authorization.at) }}</strong>
+                <strong class="signed-name">{{
+                    date(authorization.at)
+                }}</strong>
                 Date
             </span>
         </div>

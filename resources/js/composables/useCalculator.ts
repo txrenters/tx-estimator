@@ -16,24 +16,35 @@ export const CALC_FIELDS: { key: CalcField; label: string; unit?: string }[] = [
 
 // Module-level state: the Calculator page and the floating calculator share the same numbers,
 // and values survive navigation between pages.
-const text = reactive<Record<CalcField, string>>({ qty: '1', price: '0', extra: '0' });
+const text = reactive<Record<CalcField, string>>({
+    qty: '1',
+    price: '0',
+    extra: '0',
+});
 const active = ref<CalcField>('qty');
 // After a field gets focus, the first key press replaces its value (like selecting all).
 const fresh = ref(true);
 
 const value = (key: CalcField) => Math.min(100000000, evaluate(text[key]) ?? 0);
 
-export const qtyText = (n: number) => n.toLocaleString('en-US', { maximumFractionDigits: 2 });
+export const qtyText = (n: number) =>
+    n.toLocaleString('en-US', { maximumFractionDigits: 2 });
 
 // Same formulas as the original desk: N(qty × (1 + extra/100)) and N(qty × (1 + extra/100) × price).
-const adjusted = computed(() => round2(value('qty') * (1 + value('extra') / 100)));
-const total = computed(() => round2(value('qty') * (1 + value('extra') / 100) * value('price')));
+const adjusted = computed(() =>
+    round2(value('qty') * (1 + value('extra') / 100)),
+);
+const total = computed(() =>
+    round2(value('qty') * (1 + value('extra') / 100) * value('price')),
+);
 const unitCost = computed(() => value('price'));
 
 const workings = computed(() => {
     const qty = value('qty');
     const extra = value('extra');
-    const base = extra ? `${qtyText(qty)} + ${qtyText(extra)}% = ${qtyText(adjusted.value)}` : qtyText(qty);
+    const base = extra
+        ? `${qtyText(qty)} + ${qtyText(extra)}% = ${qtyText(adjusted.value)}`
+        : qtyText(qty);
 
     return `${base} × ${money(value('price'))} = ${money(total.value)}`;
 });
@@ -92,5 +103,20 @@ function reset() {
 }
 
 export function useCalculator() {
-    return { text, active, fresh, adjusted, total, unitCost, workings, hint, press, backspace, clearField, equals, type, reset };
+    return {
+        text,
+        active,
+        fresh,
+        adjusted,
+        total,
+        unitCost,
+        workings,
+        hint,
+        press,
+        backspace,
+        clearField,
+        equals,
+        type,
+        reset,
+    };
 }

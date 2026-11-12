@@ -3,7 +3,10 @@ import { usePage } from '@inertiajs/vue3';
 import { Calculator, ListPlus, X } from '@lucide/vue';
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
 import QuickCalculator from '@/components/desk/QuickCalculator.vue';
-import { CALCULATOR_LINE_EVENT, useCalculator } from '@/composables/useCalculator';
+import {
+    CALCULATOR_LINE_EVENT,
+    useCalculator,
+} from '@/composables/useCalculator';
 
 const page = usePage();
 const calc = useCalculator();
@@ -26,7 +29,12 @@ async function toggle() {
 
 function addLine() {
     window.dispatchEvent(
-        new CustomEvent(CALCULATOR_LINE_EVENT, { detail: { qty: calc.adjusted.value, materials: calc.unitCost.value } }),
+        new CustomEvent(CALCULATOR_LINE_EVENT, {
+            detail: {
+                qty: calc.adjusted.value,
+                materials: calc.unitCost.value,
+            },
+        }),
     );
     added.value = true;
 }
@@ -43,15 +51,34 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey));
 
 <template>
     <template v-if="!hidden">
-        <section v-if="open" class="panel floating-calc" role="dialog" aria-label="Calculator">
+        <section
+            v-if="open"
+            class="panel floating-calc"
+            role="dialog"
+            aria-label="Calculator"
+        >
             <header class="floating-calc-head">
                 <strong><Calculator :size="16" /> Calculator</strong>
-                <button type="button" class="icon-button" aria-label="Close calculator" @click="open = false"><X :size="16" /></button>
+                <button
+                    type="button"
+                    class="icon-button"
+                    aria-label="Close calculator"
+                    @click="open = false"
+                >
+                    <X :size="16" />
+                </button>
             </header>
             <QuickCalculator ref="quick" variant="compact" :autofocus="false">
                 <template #actions>
-                    <button v-if="onBuilder" type="button" class="button primary compact" data-test="calc-add-line" @click="addLine">
-                        <ListPlus :size="15" /> {{ added ? 'Added — add again' : 'Add to line items' }}
+                    <button
+                        v-if="onBuilder"
+                        type="button"
+                        class="button primary compact"
+                        data-test="calc-add-line"
+                        @click="addLine"
+                    >
+                        <ListPlus :size="15" />
+                        {{ added ? 'Added — add again' : 'Add to line items' }}
                     </button>
                 </template>
             </QuickCalculator>

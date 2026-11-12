@@ -53,6 +53,7 @@ export default defineConfig({
             'resources/js/components/ui/*',
             'resources/js/routes/**',
             'resources/js/wayfinder/**',
+            'docs/superpowers/reference/**',
         ],
         options: {
             denyWarnings: true,
@@ -71,6 +72,7 @@ export default defineConfig({
             'composer.json',
             'resources/js/components/ui/*',
             'resources/views/mail/*',
+            'docs/superpowers/reference/**',
         ],
         sortTailwindcss: {
             functions: ['clsx', 'cn', 'cva'],

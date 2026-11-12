@@ -1,4 +1,7 @@
-const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+const currency = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+});
 const dateFormat = new Intl.DateTimeFormat('en-US', {
     month: 'short',
     day: 'numeric',

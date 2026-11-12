@@ -11,7 +11,9 @@ const labels: Record<StatusValue, string> = {
     declined: 'Declined',
 };
 
-const cls = computed(() => (props.status === 'pending' ? 'pending-approval' : props.status));
+const cls = computed(() =>
+    props.status === 'pending' ? 'pending-approval' : props.status,
+);
 </script>
 
 <template>

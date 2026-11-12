@@ -27,7 +27,11 @@ interface Row {
     status: StatusValue;
     total: number;
     updatedAt: string;
-    flags: { belowTarget: boolean; aboveAuthorization: boolean; aboveManagerReview: boolean };
+    flags: {
+        belowTarget: boolean;
+        aboveAuthorization: boolean;
+        aboveManagerReview: boolean;
+    };
 }
 
 const props = defineProps<{
@@ -37,17 +41,34 @@ const props = defineProps<{
         links: { url: string | null; label: string; active: boolean }[];
         last_page: number;
     };
-    stats: { total: number; pending: number; approvedValue: number; templates: number };
-    filters: { company: string | number; service: string; status: string; q: string };
+    stats: {
+        total: number;
+        pending: number;
+        approvedValue: number;
+        templates: number;
+    };
+    filters: {
+        company: string | number;
+        service: string;
+        status: string;
+        q: string;
+    };
 }>();
 
 const desk = computed(() => usePage().props.desk as DeskProps);
-const showCompanyFilter = computed(() => desk.value.can.switchCompany && !desk.value.currentCompany);
-
-const eyebrow = computed(() =>
-    (desk.value.currentCompany?.location ?? 'Greater Houston').replace(/,.*$/, '').toUpperCase() + ' OPERATIONS',
+const showCompanyFilter = computed(
+    () => desk.value.can.switchCompany && !desk.value.currentCompany,
 );
-const heading = computed(() => desk.value.currentCompany?.name ?? 'Estimating desk');
+
+const eyebrow = computed(
+    () =>
+        (desk.value.currentCompany?.location ?? 'Greater Houston')
+            .replace(/,.*$/, '')
+            .toUpperCase() + ' OPERATIONS',
+);
+const heading = computed(
+    () => desk.value.currentCompany?.name ?? 'Estimating desk',
+);
 
 const filters = reactive({ ...props.filters });
 let searchTimer: ReturnType<typeof setTimeout> | undefined;
@@ -59,7 +80,11 @@ watch(
         const go = () =>
             router.get(
                 '/estimates',
-                Object.fromEntries(Object.entries(value).filter(([, v]) => v !== '' && v !== null)),
+                Object.fromEntries(
+                    Object.entries(value).filter(
+                        ([, v]) => v !== '' && v !== null,
+                    ),
+                ),
                 { preserveState: true, preserveScroll: true, replace: true },
             );
 
@@ -82,7 +107,9 @@ function toggle(id: number) {
 }
 
 const compareHref = computed(() =>
-    selected.value.length ? '/compare?' + selected.value.map((id) => `ids[]=${id}`).join('&') : '/compare',
+    selected.value.length
+        ? '/compare?' + selected.value.map((id) => `ids[]=${id}`).join('&')
+        : '/compare',
 );
 </script>
 
@@ -92,16 +119,45 @@ const compareHref = computed(() =>
         <div>
             <div class="eyebrow"><i />{{ eyebrow }}</div>
             <h1>{{ heading }}</h1>
-            <p>Build service pricing, track approvals, and turn estimates into proposals.</p>
+            <p>
+                Build service pricing, track approvals, and turn estimates into
+                proposals.
+            </p>
         </div>
-        <Link href="/estimates/create" class="button primary"><Plus :size="19" /> New estimate</Link>
+        <Link href="/estimates/create" class="button primary"
+            ><Plus :size="19" /> New estimate</Link
+        >
     </div>
 
     <div class="metrics">
-        <StatTile label="Total estimates" :value="stats.total" hint="Estimates in this view" :icon="ClipboardList" tone="green" />
-        <StatTile label="Pending approval" :value="stats.pending" hint="Awaiting a decision" :icon="Clock3" tone="orange" />
-        <StatTile label="Approved value" :value="money(stats.approvedValue)" hint="Total approved estimates" :icon="BadgeCheck" tone="blue" />
-        <StatTile label="Service templates" :value="stats.templates" hint="Reusable scopes and rates" :icon="LayoutGrid" tone="purple" />
+        <StatTile
+            label="Total estimates"
+            :value="stats.total"
+            hint="Estimates in this view"
+            :icon="ClipboardList"
+            tone="green"
+        />
+        <StatTile
+            label="Pending approval"
+            :value="stats.pending"
+            hint="Awaiting a decision"
+            :icon="Clock3"
+            tone="orange"
+        />
+        <StatTile
+            label="Approved value"
+            :value="money(stats.approvedValue)"
+            hint="Total approved estimates"
+            :icon="BadgeCheck"
+            tone="blue"
+        />
+        <StatTile
+            label="Service templates"
+            :value="stats.templates"
+            hint="Reusable scopes and rates"
+            :icon="LayoutGrid"
+            tone="purple"
+        />
     </div>
 
     <section class="panel">
@@ -111,26 +167,54 @@ const compareHref = computed(() =>
                 <p>Manage service quotes across your companies.</p>
             </div>
             <Link :href="compareHref" class="button secondary compact">
-                <GitCompareArrows :size="16" /> Compare{{ selected.length ? ` (${selected.length})` : '' }}
+                <GitCompareArrows :size="16" /> Compare{{
+                    selected.length ? ` (${selected.length})` : ''
+                }}
             </Link>
         </div>
         <div class="filters">
             <label class="search">
                 <Search :size="17" />
-                <input v-model="filters.q" aria-label="Search estimates" placeholder="Search estimates…" />
+                <input
+                    v-model="filters.q"
+                    aria-label="Search estimates"
+                    placeholder="Search estimates…"
+                />
             </label>
             <div class="selects">
-                <select v-if="showCompanyFilter" v-model="filters.company" aria-label="Company filter">
+                <select
+                    v-if="showCompanyFilter"
+                    v-model="filters.company"
+                    aria-label="Company filter"
+                >
                     <option value="">All companies</option>
-                    <option v-for="c in desk.companies" :key="c.id" :value="c.id">{{ c.name }}</option>
+                    <option
+                        v-for="c in desk.companies"
+                        :key="c.id"
+                        :value="c.id"
+                    >
+                        {{ c.name }}
+                    </option>
                 </select>
                 <select v-model="filters.service" aria-label="Service filter">
                     <option value="">All services</option>
-                    <option v-for="s in desk.currentCompany?.services ?? desk.serviceTypes" :key="s">{{ s }}</option>
+                    <option
+                        v-for="s in desk.currentCompany?.services ??
+                        desk.serviceTypes"
+                        :key="s"
+                    >
+                        {{ s }}
+                    </option>
                 </select>
                 <select v-model="filters.status" aria-label="Status filter">
                     <option value="">All statuses</option>
-                    <option v-for="s in desk.statuses" :key="s.value" :value="s.value">{{ s.label }}</option>
+                    <option
+                        v-for="s in desk.statuses"
+                        :key="s.value"
+                        :value="s.value"
+                    >
+                        {{ s.label }}
+                    </option>
                 </select>
             </div>
         </div>
@@ -139,7 +223,9 @@ const compareHref = computed(() =>
             <table class="estimate-table">
                 <thead>
                     <tr>
-                        <th class="check-col"><GitCompareArrows :size="14" /></th>
+                        <th class="check-col">
+                            <GitCompareArrows :size="14" />
+                        </th>
                         <th>Estimate</th>
                         <th>Company</th>
                         <th>Status</th>
@@ -155,30 +241,64 @@ const compareHref = computed(() =>
                                 type="checkbox"
                                 :aria-label="`Compare ${e.title}`"
                                 :checked="selected.includes(e.id)"
-                                :disabled="!selected.includes(e.id) && selected.length >= 3"
+                                :disabled="
+                                    !selected.includes(e.id) &&
+                                    selected.length >= 3
+                                "
                                 @change="toggle(e.id)"
                             />
                         </td>
                         <td>
-                            <Link :href="`/estimates/${e.id}/edit`" class="row-link">{{ e.title }}</Link>
-                            <small>{{ e.number }}<template v-if="e.client"> · {{ e.client }}</template></small>
+                            <Link
+                                :href="`/estimates/${e.id}/edit`"
+                                class="row-link"
+                                >{{ e.title }}</Link
+                            >
+                            <small
+                                >{{ e.number
+                                }}<template v-if="e.client">
+                                    · {{ e.client }}</template
+                                ></small
+                            >
                         </td>
                         <td>
-                            <span class="company-tag" :style="{ '--company-tone': e.company.tone, '--company-color': e.company.color }">
+                            <span
+                                class="company-tag"
+                                :style="{
+                                    '--company-tone': e.company.tone,
+                                    '--company-color': e.company.color,
+                                }"
+                            >
                                 {{ e.company.short }}
                             </span>
                         </td>
                         <td>
                             <StatusPill :status="e.status" />
-                            <div v-if="e.flags.aboveManagerReview || e.flags.belowTarget" class="flags">
-                                <span v-if="e.flags.aboveManagerReview" class="flag">Manager review</span>
-                                <span v-if="e.flags.belowTarget" class="flag">Below margin</span>
+                            <div
+                                v-if="
+                                    e.flags.aboveManagerReview ||
+                                    e.flags.belowTarget
+                                "
+                                class="flags"
+                            >
+                                <span
+                                    v-if="e.flags.aboveManagerReview"
+                                    class="flag"
+                                    >Manager review</span
+                                >
+                                <span v-if="e.flags.belowTarget" class="flag"
+                                    >Below margin</span
+                                >
                             </div>
                         </td>
                         <td class="amount">{{ money(e.total) }}</td>
                         <td>{{ date(e.updatedAt) }}</td>
                         <td>
-                            <Link :href="`/estimates/${e.id}/proposal`" class="icon-button" aria-label="Proposal">
+                            <Link
+                                :href="`/estimates/${e.id}/proposal`"
+                                class="icon-button"
+                                aria-label="Proposal"
+                            >
                                 <FileText :size="16" />
                             </Link>
                         </td>
@@ -190,8 +310,12 @@ const compareHref = computed(() =>
         <div v-if="!estimates.data.length" class="empty">
             <span class="empty-icon"><ClipboardList :size="20" /></span>
             <h3>No estimates yet</h3>
-            <p>Start with a service template or build an estimate from scratch.</p>
-            <Link href="/templates" class="button secondary compact">Browse templates</Link>
+            <p>
+                Start with a service template or build an estimate from scratch.
+            </p>
+            <Link href="/templates" class="button secondary compact"
+                >Browse templates</Link
+            >
         </div>
 
         <div class="table-foot">
@@ -211,5 +335,4 @@ const compareHref = computed(() =>
             <span v-else>USD</span>
         </div>
     </section>
-
 </template>

@@ -13,7 +13,6 @@ class EstimateRules
 {
     public const PRICING_KEYS = ['markup', 'discount', 'trip', 'authorization', 'manager', 'target'];
 
-
     /** @return array<string, mixed> */
     public static function lines(): array
     {

@@ -3,6 +3,7 @@
 use App\Models\Company;
 use App\Models\User;
 use App\Support\CurrentCompany;
+use Illuminate\Validation\ValidationException;
 use Inertia\Testing\AssertableInertia as Assert;
 
 beforeEach(function () {
@@ -57,7 +58,7 @@ test('admin in all companies must request a company for write', function () {
     $this->actingAs(User::factory()->admin()->create());
 
     expect(fn () => app(CurrentCompany::class)->companyForWrite(null))
-        ->toThrow(Illuminate\Validation\ValidationException::class);
+        ->toThrow(ValidationException::class);
     expect(app(CurrentCompany::class)->companyForWrite($this->roof->id)->id)->toBe($this->roof->id);
 });
 

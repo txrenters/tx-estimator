@@ -1,323 +1,323 @@
 [
-  {
-    "name": "empty lines",
-    "lines": [],
-    "pricing": {
-      "markup": 30,
-      "discount": 0,
-      "trip": 0,
-      "authorization": 250,
-      "manager": 1000,
-      "target": 25
+    {
+        "name": "empty lines",
+        "lines": [],
+        "pricing": {
+            "markup": 30,
+            "discount": 0,
+            "trip": 0,
+            "authorization": 250,
+            "manager": 1000,
+            "target": 25
+        },
+        "expected": {
+            "cost": 0,
+            "subtotal": 0,
+            "discount": 0,
+            "total": 0,
+            "incomplete": false,
+            "margin": 0
+        },
+        "flags": {
+            "belowTarget": false,
+            "aboveAuthorization": false,
+            "aboveManagerReview": false
+        }
     },
-    "expected": {
-      "cost": 0,
-      "subtotal": 0,
-      "discount": 0,
-      "total": 0,
-      "incomplete": false,
-      "margin": 0
+    {
+        "name": "single fixed 1800 line, no costs",
+        "lines": [
+            {
+                "name": "x",
+                "qty": 1,
+                "unit": "job",
+                "labor": 0,
+                "materials": 0,
+                "fixed": 1800
+            }
+        ],
+        "pricing": {
+            "markup": 30,
+            "discount": 0,
+            "trip": 0,
+            "authorization": 250,
+            "manager": 1000,
+            "target": 25
+        },
+        "expected": {
+            "cost": 0,
+            "subtotal": 1800,
+            "discount": 0,
+            "total": 1800,
+            "incomplete": true,
+            "margin": 100
+        },
+        "flags": {
+            "belowTarget": false,
+            "aboveAuthorization": true,
+            "aboveManagerReview": true
+        }
     },
-    "flags": {
-      "belowTarget": false,
-      "aboveAuthorization": false,
-      "aboveManagerReview": false
+    {
+        "name": "markup 30 on labor 100 + materials 50 qty 2",
+        "lines": [
+            {
+                "name": "x",
+                "qty": 2,
+                "unit": "job",
+                "labor": 100,
+                "materials": 50,
+                "fixed": null
+            }
+        ],
+        "pricing": {
+            "markup": 30,
+            "discount": 0,
+            "trip": 0,
+            "authorization": 250,
+            "manager": 1000,
+            "target": 25
+        },
+        "expected": {
+            "cost": 300,
+            "subtotal": 390,
+            "discount": 0,
+            "total": 390,
+            "incomplete": false,
+            "margin": 23.076923076923077
+        },
+        "flags": {
+            "belowTarget": true,
+            "aboveAuthorization": true,
+            "aboveManagerReview": false
+        }
+    },
+    {
+        "name": "fixed 0 is a real price",
+        "lines": [
+            {
+                "name": "x",
+                "qty": 1,
+                "unit": "job",
+                "labor": 100,
+                "materials": 0,
+                "fixed": 0
+            }
+        ],
+        "pricing": {
+            "markup": 30,
+            "discount": 0,
+            "trip": 0,
+            "authorization": 250,
+            "manager": 1000,
+            "target": 25
+        },
+        "expected": {
+            "cost": 100,
+            "subtotal": 0,
+            "discount": 0,
+            "total": 0,
+            "incomplete": false,
+            "margin": 0
+        },
+        "flags": {
+            "belowTarget": false,
+            "aboveAuthorization": false,
+            "aboveManagerReview": false
+        }
+    },
+    {
+        "name": "qty 0 zero-cost line is not incomplete",
+        "lines": [
+            {
+                "name": "x",
+                "qty": 0,
+                "unit": "job",
+                "labor": 0,
+                "materials": 0,
+                "fixed": null
+            },
+            {
+                "name": "x",
+                "qty": 1,
+                "unit": "job",
+                "labor": 80,
+                "materials": 0,
+                "fixed": null
+            }
+        ],
+        "pricing": {
+            "markup": 30,
+            "discount": 0,
+            "trip": 0,
+            "authorization": 250,
+            "manager": 1000,
+            "target": 25
+        },
+        "expected": {
+            "cost": 80,
+            "subtotal": 104,
+            "discount": 0,
+            "total": 104,
+            "incomplete": false,
+            "margin": 23.076923076923077
+        },
+        "flags": {
+            "belowTarget": true,
+            "aboveAuthorization": false,
+            "aboveManagerReview": false
+        }
+    },
+    {
+        "name": "discount 10 and trip 75",
+        "lines": [
+            {
+                "name": "x",
+                "qty": 1,
+                "unit": "job",
+                "labor": 200,
+                "materials": 100,
+                "fixed": null
+            },
+            {
+                "name": "x",
+                "qty": 3,
+                "unit": "job",
+                "labor": 40,
+                "materials": 0,
+                "fixed": null
+            }
+        ],
+        "pricing": {
+            "markup": 30,
+            "discount": 10,
+            "trip": 75,
+            "authorization": 250,
+            "manager": 1000,
+            "target": 25
+        },
+        "expected": {
+            "cost": 420,
+            "subtotal": 546,
+            "discount": 54.6,
+            "total": 566.4,
+            "incomplete": false,
+            "margin": 25.847457627118644
+        },
+        "flags": {
+            "belowTarget": false,
+            "aboveAuthorization": true,
+            "aboveManagerReview": false
+        }
+    },
+    {
+        "name": "rounding edge",
+        "lines": [
+            {
+                "name": "x",
+                "qty": 3,
+                "unit": "job",
+                "labor": 0.105,
+                "materials": 0,
+                "fixed": null
+            },
+            {
+                "name": "x",
+                "qty": 1.5,
+                "unit": "job",
+                "labor": 0,
+                "materials": 33.333,
+                "fixed": null
+            }
+        ],
+        "pricing": {
+            "markup": 30,
+            "discount": 0,
+            "trip": 0,
+            "authorization": 250,
+            "manager": 1000,
+            "target": 25
+        },
+        "expected": {
+            "cost": 50.32,
+            "subtotal": 65.41,
+            "discount": 0,
+            "total": 65.41,
+            "incomplete": false,
+            "margin": 23.06986699281455
+        },
+        "flags": {
+            "belowTarget": true,
+            "aboveAuthorization": false,
+            "aboveManagerReview": false
+        }
+    },
+    {
+        "name": "below target margin",
+        "lines": [
+            {
+                "name": "x",
+                "qty": 1,
+                "unit": "job",
+                "labor": 1000,
+                "materials": 0,
+                "fixed": 1100
+            }
+        ],
+        "pricing": {
+            "markup": 30,
+            "discount": 0,
+            "trip": 0,
+            "authorization": 250,
+            "manager": 1000,
+            "target": 25
+        },
+        "expected": {
+            "cost": 1000,
+            "subtotal": 1100,
+            "discount": 0,
+            "total": 1100,
+            "incomplete": false,
+            "margin": 9.090909090909092
+        },
+        "flags": {
+            "belowTarget": true,
+            "aboveAuthorization": true,
+            "aboveManagerReview": true
+        }
+    },
+    {
+        "name": "above manager threshold",
+        "lines": [
+            {
+                "name": "x",
+                "qty": 10,
+                "unit": "job",
+                "labor": 120,
+                "materials": 30,
+                "fixed": null
+            }
+        ],
+        "pricing": {
+            "markup": 45,
+            "discount": 0,
+            "trip": 0,
+            "authorization": 250,
+            "manager": 1000,
+            "target": 25
+        },
+        "expected": {
+            "cost": 1500,
+            "subtotal": 2175,
+            "discount": 0,
+            "total": 2175,
+            "incomplete": false,
+            "margin": 31.03448275862069
+        },
+        "flags": {
+            "belowTarget": false,
+            "aboveAuthorization": true,
+            "aboveManagerReview": true
+        }
     }
-  },
-  {
-    "name": "single fixed 1800 line, no costs",
-    "lines": [
-      {
-        "name": "x",
-        "qty": 1,
-        "unit": "job",
-        "labor": 0,
-        "materials": 0,
-        "fixed": 1800
-      }
-    ],
-    "pricing": {
-      "markup": 30,
-      "discount": 0,
-      "trip": 0,
-      "authorization": 250,
-      "manager": 1000,
-      "target": 25
-    },
-    "expected": {
-      "cost": 0,
-      "subtotal": 1800,
-      "discount": 0,
-      "total": 1800,
-      "incomplete": true,
-      "margin": 100
-    },
-    "flags": {
-      "belowTarget": false,
-      "aboveAuthorization": true,
-      "aboveManagerReview": true
-    }
-  },
-  {
-    "name": "markup 30 on labor 100 + materials 50 qty 2",
-    "lines": [
-      {
-        "name": "x",
-        "qty": 2,
-        "unit": "job",
-        "labor": 100,
-        "materials": 50,
-        "fixed": null
-      }
-    ],
-    "pricing": {
-      "markup": 30,
-      "discount": 0,
-      "trip": 0,
-      "authorization": 250,
-      "manager": 1000,
-      "target": 25
-    },
-    "expected": {
-      "cost": 300,
-      "subtotal": 390,
-      "discount": 0,
-      "total": 390,
-      "incomplete": false,
-      "margin": 23.076923076923077
-    },
-    "flags": {
-      "belowTarget": true,
-      "aboveAuthorization": true,
-      "aboveManagerReview": false
-    }
-  },
-  {
-    "name": "fixed 0 is a real price",
-    "lines": [
-      {
-        "name": "x",
-        "qty": 1,
-        "unit": "job",
-        "labor": 100,
-        "materials": 0,
-        "fixed": 0
-      }
-    ],
-    "pricing": {
-      "markup": 30,
-      "discount": 0,
-      "trip": 0,
-      "authorization": 250,
-      "manager": 1000,
-      "target": 25
-    },
-    "expected": {
-      "cost": 100,
-      "subtotal": 0,
-      "discount": 0,
-      "total": 0,
-      "incomplete": false,
-      "margin": 0
-    },
-    "flags": {
-      "belowTarget": false,
-      "aboveAuthorization": false,
-      "aboveManagerReview": false
-    }
-  },
-  {
-    "name": "qty 0 zero-cost line is not incomplete",
-    "lines": [
-      {
-        "name": "x",
-        "qty": 0,
-        "unit": "job",
-        "labor": 0,
-        "materials": 0,
-        "fixed": null
-      },
-      {
-        "name": "x",
-        "qty": 1,
-        "unit": "job",
-        "labor": 80,
-        "materials": 0,
-        "fixed": null
-      }
-    ],
-    "pricing": {
-      "markup": 30,
-      "discount": 0,
-      "trip": 0,
-      "authorization": 250,
-      "manager": 1000,
-      "target": 25
-    },
-    "expected": {
-      "cost": 80,
-      "subtotal": 104,
-      "discount": 0,
-      "total": 104,
-      "incomplete": false,
-      "margin": 23.076923076923077
-    },
-    "flags": {
-      "belowTarget": true,
-      "aboveAuthorization": false,
-      "aboveManagerReview": false
-    }
-  },
-  {
-    "name": "discount 10 and trip 75",
-    "lines": [
-      {
-        "name": "x",
-        "qty": 1,
-        "unit": "job",
-        "labor": 200,
-        "materials": 100,
-        "fixed": null
-      },
-      {
-        "name": "x",
-        "qty": 3,
-        "unit": "job",
-        "labor": 40,
-        "materials": 0,
-        "fixed": null
-      }
-    ],
-    "pricing": {
-      "markup": 30,
-      "discount": 10,
-      "trip": 75,
-      "authorization": 250,
-      "manager": 1000,
-      "target": 25
-    },
-    "expected": {
-      "cost": 420,
-      "subtotal": 546,
-      "discount": 54.6,
-      "total": 566.4,
-      "incomplete": false,
-      "margin": 25.847457627118644
-    },
-    "flags": {
-      "belowTarget": false,
-      "aboveAuthorization": true,
-      "aboveManagerReview": false
-    }
-  },
-  {
-    "name": "rounding edge",
-    "lines": [
-      {
-        "name": "x",
-        "qty": 3,
-        "unit": "job",
-        "labor": 0.105,
-        "materials": 0,
-        "fixed": null
-      },
-      {
-        "name": "x",
-        "qty": 1.5,
-        "unit": "job",
-        "labor": 0,
-        "materials": 33.333,
-        "fixed": null
-      }
-    ],
-    "pricing": {
-      "markup": 30,
-      "discount": 0,
-      "trip": 0,
-      "authorization": 250,
-      "manager": 1000,
-      "target": 25
-    },
-    "expected": {
-      "cost": 50.32,
-      "subtotal": 65.41,
-      "discount": 0,
-      "total": 65.41,
-      "incomplete": false,
-      "margin": 23.06986699281455
-    },
-    "flags": {
-      "belowTarget": true,
-      "aboveAuthorization": false,
-      "aboveManagerReview": false
-    }
-  },
-  {
-    "name": "below target margin",
-    "lines": [
-      {
-        "name": "x",
-        "qty": 1,
-        "unit": "job",
-        "labor": 1000,
-        "materials": 0,
-        "fixed": 1100
-      }
-    ],
-    "pricing": {
-      "markup": 30,
-      "discount": 0,
-      "trip": 0,
-      "authorization": 250,
-      "manager": 1000,
-      "target": 25
-    },
-    "expected": {
-      "cost": 1000,
-      "subtotal": 1100,
-      "discount": 0,
-      "total": 1100,
-      "incomplete": false,
-      "margin": 9.090909090909092
-    },
-    "flags": {
-      "belowTarget": true,
-      "aboveAuthorization": true,
-      "aboveManagerReview": true
-    }
-  },
-  {
-    "name": "above manager threshold",
-    "lines": [
-      {
-        "name": "x",
-        "qty": 10,
-        "unit": "job",
-        "labor": 120,
-        "materials": 30,
-        "fixed": null
-      }
-    ],
-    "pricing": {
-      "markup": 45,
-      "discount": 0,
-      "trip": 0,
-      "authorization": 250,
-      "manager": 1000,
-      "target": 25
-    },
-    "expected": {
-      "cost": 1500,
-      "subtotal": 2175,
-      "discount": 0,
-      "total": 2175,
-      "incomplete": false,
-      "margin": 31.03448275862069
-    },
-    "flags": {
-      "belowTarget": false,
-      "aboveAuthorization": true,
-      "aboveManagerReview": true
-    }
-  }
 ]

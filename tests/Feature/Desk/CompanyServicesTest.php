@@ -4,6 +4,7 @@ use App\Models\Company;
 use App\Models\Estimate;
 use App\Models\ServiceTemplate;
 use App\Models\User;
+use App\Support\ServiceCatalog;
 use Database\Seeders\CompanySeeder;
 use Database\Seeders\ServiceTemplateSeeder;
 use Inertia\Testing\AssertableInertia as Assert;
@@ -32,7 +33,7 @@ test('each seeded company offers only its own trade', function () {
 });
 
 test('a company without a list offers every service', function () {
-    expect(Company::factory()->create()->serviceTypes())->toBe(app(App\Support\ServiceCatalog::class)->active());
+    expect(Company::factory()->create()->serviceTypes())->toBe(app(ServiceCatalog::class)->active());
 });
 
 test('every seeded template fits its company trade', function () {

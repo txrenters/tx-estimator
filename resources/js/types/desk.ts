@@ -97,7 +97,6 @@ export interface Revision {
     snapshot: Partial<BuilderEstimate>;
 }
 
-
 export interface ProposalData {
     number: string;
     title: string;

@@ -48,7 +48,12 @@ interface NavGroup {
 const groups = computed<NavGroup[]>(() => {
     const can = desk.value.can;
     const isAdmin = can.manageCompanies;
-    const item = (name: string, href: string, icon: Component): NavItem => ({ name, href, icon, match: href });
+    const item = (name: string, href: string, icon: Component): NavItem => ({
+        name,
+        href,
+        icon,
+        match: href,
+    });
 
     const work: NavItem[] = [];
     if (can.viewOverview) {
@@ -60,7 +65,10 @@ const groups = computed<NavGroup[]>(() => {
         item('Calculator', '/calculator', Calculator),
     );
 
-    const catalog = [item('Service templates', '/templates', LayoutGrid), item('Pricing defaults', '/pricing-defaults', SlidersHorizontal)];
+    const catalog = [
+        item('Service templates', '/templates', LayoutGrid),
+        item('Pricing defaults', '/pricing-defaults', SlidersHorizontal),
+    ];
 
     // The company being worked in: managers always; admins once they pick a company.
     const company: NavItem[] = [];
@@ -73,7 +81,11 @@ const groups = computed<NavGroup[]>(() => {
 
     // Everything across companies, for admins.
     const admin: NavItem[] = isAdmin
-        ? [item('Companies', '/companies', Building2), item('Services', '/services', Tags), item('Users', '/users', Users)]
+        ? [
+              item('Companies', '/companies', Building2),
+              item('Services', '/services', Tags),
+              item('Users', '/users', Users),
+          ]
         : [];
 
     return [
@@ -84,13 +96,22 @@ const groups = computed<NavGroup[]>(() => {
     ].filter((g) => g.items.length > 0);
 });
 
-const isActive = (match: string) => page.url === match || page.url.startsWith(match + '/') || page.url.startsWith(match + '?');
+const isActive = (match: string) =>
+    page.url === match ||
+    page.url.startsWith(match + '/') ||
+    page.url.startsWith(match + '?');
 
 function switchTo(companyId: number | null) {
-    router.post('/current-company', { company_id: companyId }, { preserveScroll: true, onSuccess: () => emit('close') });
+    router.post(
+        '/current-company',
+        { company_id: companyId },
+        { preserveScroll: true, onSuccess: () => emit('close') },
+    );
 }
 
-const pinned = computed(() => (desk.value.can.switchCompany ? null : desk.value.currentCompany));
+const pinned = computed(() =>
+    desk.value.can.switchCompany ? null : desk.value.currentCompany,
+);
 </script>
 
 <template>
@@ -111,34 +132,72 @@ const pinned = computed(() => (desk.value.can.switchCompany ? null : desk.value.
                     :class="{ 'has-logo': desk.currentCompany?.logoUrl }"
                     data-test="company-switcher"
                 >
-                    <span v-if="desk.currentCompany?.logoUrl" class="switcher-logo">
-                        <img :src="desk.currentCompany.logoUrl" :alt="`${desk.currentCompany.name} logo`" />
+                    <span
+                        v-if="desk.currentCompany?.logoUrl"
+                        class="switcher-logo"
+                    >
+                        <img
+                            :src="desk.currentCompany.logoUrl"
+                            :alt="`${desk.currentCompany.name} logo`"
+                        />
                     </span>
-                    <CompanyMark v-else-if="desk.currentCompany" :company="desk.currentCompany" size="badge" />
+                    <CompanyMark
+                        v-else-if="desk.currentCompany"
+                        :company="desk.currentCompany"
+                        size="badge"
+                    />
                     <span v-else class="workspace-avatar">CC</span>
                     <span class="company-switcher-text">
                         <small>COMPANY</small>
-                        <strong>{{ desk.currentCompany?.name ?? 'All companies' }}</strong>
+                        <strong>{{
+                            desk.currentCompany?.name ?? 'All companies'
+                        }}</strong>
                     </span>
                     <ChevronsUpDown :size="15" />
                 </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent class="w-64" align="start" :side-offset="6">
-                <DropdownMenuItem class="company-option" @select="switchTo(null)">
-                    <span class="option-logo empty"><span class="company-dot" style="background: #a4e9be" /></span>
+                <DropdownMenuItem
+                    class="company-option"
+                    @select="switchTo(null)"
+                >
+                    <span class="option-logo empty"
+                        ><span class="company-dot" style="background: #a4e9be"
+                    /></span>
                     All companies
-                    <Check v-if="!desk.currentCompany" class="ml-auto" :size="15" />
+                    <Check
+                        v-if="!desk.currentCompany"
+                        class="ml-auto"
+                        :size="15"
+                    />
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem v-for="company in desk.companies" :key="company.id" class="company-option" @select="switchTo(company.id)">
-                    <span v-if="company.logoUrl" class="option-logo"><img :src="company.logoUrl" alt="" /></span>
-                    <span v-else class="option-logo empty"><CompanyMark :company="company" /></span>
+                <DropdownMenuItem
+                    v-for="company in desk.companies"
+                    :key="company.id"
+                    class="company-option"
+                    @select="switchTo(company.id)"
+                >
+                    <span v-if="company.logoUrl" class="option-logo"
+                        ><img :src="company.logoUrl" alt=""
+                    /></span>
+                    <span v-else class="option-logo empty"
+                        ><CompanyMark :company="company"
+                    /></span>
                     {{ company.name }}
-                    <Check v-if="desk.currentCompany?.id === company.id" class="ml-auto" :size="15" />
+                    <Check
+                        v-if="desk.currentCompany?.id === company.id"
+                        class="ml-auto"
+                        :size="15"
+                    />
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
-        <div v-else-if="pinned" class="company-switcher static" :class="{ 'has-logo': pinned.logoUrl }">
+        <div
+            v-else-if="pinned"
+            class="company-switcher static"
+            :class="{ 'has-logo': pinned.logoUrl }"
+        >
             <span v-if="pinned.logoUrl" class="switcher-logo">
                 <img :src="pinned.logoUrl" :alt="`${pinned.name} logo`" />
             </span>

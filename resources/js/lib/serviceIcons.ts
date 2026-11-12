@@ -1,4 +1,17 @@
-import { Bug, Droplet, Flame, Hammer, House, Leaf, Paintbrush, Sparkles, Trees, Wind, Wrench, Zap } from '@lucide/vue';
+import {
+    Bug,
+    Droplet,
+    Flame,
+    Hammer,
+    House,
+    Leaf,
+    Paintbrush,
+    Sparkles,
+    Trees,
+    Wind,
+    Wrench,
+    Zap,
+} from '@lucide/vue';
 import type { Component } from 'vue';
 
 /** Icons an admin can pick for a trade (must match ServiceGroup::ICONS). */
@@ -17,4 +30,5 @@ export const SERVICE_ICONS: Record<string, Component> = {
     trees: Trees,
 };
 
-export const serviceIcon = (name: string): Component => SERVICE_ICONS[name] ?? Wrench;
+export const serviceIcon = (name: string): Component =>
+    SERVICE_ICONS[name] ?? Wrench;

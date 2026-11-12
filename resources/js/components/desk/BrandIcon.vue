@@ -9,7 +9,14 @@ defineProps<{ company: CompanySummary }>();
     <span v-if="company.logoUrl" class="brand-logo">
         <img :src="company.logoUrl" :alt="`${company.name} logo`" />
     </span>
-    <span v-else class="brand-icon" :style="{ '--company-tone': company.tone, '--company-color': company.color }">
+    <span
+        v-else
+        class="brand-icon"
+        :style="{
+            '--company-tone': company.tone,
+            '--company-color': company.color,
+        }"
+    >
         <component :is="serviceIcon(company.icon)" :size="18" />
     </span>
 </template>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $estimate_id
  * @property int $user_id
  * @property array<string, mixed> $snapshot
- * @property \Carbon\CarbonImmutable $created_at
+ * @property CarbonImmutable $created_at
  * @property-read User $user
  */
 #[Fillable(['estimate_id', 'user_id', 'snapshot'])]

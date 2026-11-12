@@ -3,7 +3,12 @@ import { router } from '@inertiajs/vue3';
 import type { PendingVisit } from '@inertiajs/core';
 import { Check, Save, Trash2 } from '@lucide/vue';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogTitle,
+} from '@/components/ui/dialog';
 
 /**
  * Asks before leaving a page with unsaved changes: Save changes / Discard / Keep editing.
@@ -99,7 +104,10 @@ function onBeforeUnload(event: BeforeUnloadEvent) {
 let removeListener: (() => void) | null = null;
 
 onMounted(() => {
-    removeListener = router.on('before', onBeforeVisit as (event: CustomEvent) => void);
+    removeListener = router.on(
+        'before',
+        onBeforeVisit as (event: CustomEvent) => void,
+    );
     window.addEventListener('beforeunload', onBeforeUnload);
 });
 
@@ -110,19 +118,48 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <Dialog :open="open" @update:open="(value: boolean) => !value && keepEditing()">
-        <DialogContent class="desk-dialog sm:max-w-md" data-test="unsaved-dialog">
+    <Dialog
+        :open="open"
+        @update:open="(value: boolean) => !value && keepEditing()"
+    >
+        <DialogContent
+            class="desk-dialog sm:max-w-md"
+            data-test="unsaved-dialog"
+        >
             <div class="desk">
                 <DialogTitle as="h2">You have unsaved changes</DialogTitle>
-                <DialogDescription class="muted">Save them before leaving, or discard them.</DialogDescription>
+                <DialogDescription class="muted"
+                    >Save them before leaving, or discard
+                    them.</DialogDescription
+                >
                 <div class="actions dialog-actions unsaved-actions">
-                    <button type="button" class="button secondary" @click="keepEditing">Keep editing</button>
+                    <button
+                        type="button"
+                        class="button secondary"
+                        @click="keepEditing"
+                    >
+                        Keep editing
+                    </button>
                     <span class="actions">
-                        <button type="button" class="button danger-outline" :disabled="saving" @click="proceed">
+                        <button
+                            type="button"
+                            class="button danger-outline"
+                            :disabled="saving"
+                            @click="proceed"
+                        >
                             <Trash2 :size="15" /> Discard
                         </button>
-                        <button type="button" class="button primary" :disabled="saving" @click="saveAndLeave">
-                            <Save v-if="!saving" :size="15" /><Check v-else :size="15" /> {{ saving ? 'Saving…' : 'Save changes' }}
+                        <button
+                            type="button"
+                            class="button primary"
+                            :disabled="saving"
+                            @click="saveAndLeave"
+                        >
+                            <Save v-if="!saving" :size="15" /><Check
+                                v-else
+                                :size="15"
+                            />
+                            {{ saving ? 'Saving…' : 'Save changes' }}
                         </button>
                     </span>
                 </div>
